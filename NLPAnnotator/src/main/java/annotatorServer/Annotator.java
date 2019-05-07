@@ -3,13 +3,32 @@ package annotatorServer;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Annotator {
+import spark.Request;
+import spark.Response;
+import spark.Route;
+
+public abstract class Annotator implements Route{
 	
-	List<AnnotatorType> annotatorTypes;
-	List<String> nameTypes;
-	public Annotator() {
-		nameTypes = new ArrayList<>();
-		annotatorTypes = new ArrayList<>();
+
+	
+	@Override
+	public Object handle(Request request, Response response) throws Exception {
+		String jsonOutput = process(request.body());
+		setHeader(response);
+		sendResponse(response, jsonOutput);
+		return response.body();
 	}
+	
+	public abstract String process(String request);
+	
+	public void setHeader(Response response){
+		response.status(200);
+		response.header("Content-Type", "application/json; charset=\"utf-8\"");
+	}
+	
+	public void sendResponse(Response response, String data){
+		response.body(data);
+	}
+	
 
 }

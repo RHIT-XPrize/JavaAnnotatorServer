@@ -9,6 +9,8 @@ repositories {
 
 dependencies {    
     compile 'com.google.cloud:google-cloud-language:1.70.0'
+    compile "com.sparkjava:spark-core:2.8.0"
+    compile group: 'org.slf4j', name:'slf4j-api', version: '1.7.2'
     compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
     
     // Use JUnit test framework

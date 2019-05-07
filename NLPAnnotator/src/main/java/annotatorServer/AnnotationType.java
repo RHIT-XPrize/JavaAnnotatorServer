@@ -2,10 +2,10 @@ package annotatorServer;
 
 import java.util.List;
 
-public abstract class AnnotatorType{
+public abstract class AnnotationType{
 
 	private String name;
-	public AnnotatorType(String name) {
+	public AnnotationType(String name) {
 		this.name = name;
 	}
 	
