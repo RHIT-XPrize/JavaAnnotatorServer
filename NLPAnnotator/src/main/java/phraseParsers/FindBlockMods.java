@@ -27,11 +27,11 @@ public class FindBlockMods implements PhraseParser{
 				for(int j = i-1; j >= 0; j--){
 					WordProperties subWord = phrase.sentence.get(j);
 					if(subWord.partOfSpeech.equalsIgnoreCase("ADJ") && subWord.parent.equals(word)){
-						output += subWord.lemma;
+						output += subWord.lemma + "|";
 					}
 					for(String dir: directions){
 						if(dir.equalsIgnoreCase(subWord.lemma)){
-							output += subWord.lemma;
+							output += subWord.lemma + "|";
 						}
 					}
 					if(subWord.partOfSpeech.equalsIgnoreCase("NOUN")){
