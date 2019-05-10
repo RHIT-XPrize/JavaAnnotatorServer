@@ -7,10 +7,12 @@ import com.google.gson.Gson;
 public class PickUpArtifact implements CommandArtifact {
 
 	boolean usesGesture;
+	String assignedName;
 	List<String> mods;
 	
 	public PickUpArtifact(boolean usesGesture, List<String> mods) {
 		this.usesGesture = usesGesture;
+		this.assignedName = "";
 		this.mods = mods;
 	}
 	
