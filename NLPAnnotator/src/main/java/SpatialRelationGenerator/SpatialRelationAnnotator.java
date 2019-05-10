@@ -19,8 +19,6 @@ public class SpatialRelationAnnotator extends Annotator{
 		List<OutputBlock> output = convertToOutputBlocks(blocks);
 		
 		
-		//TODO: Convert inner blocks to output blocks for neat JSON
-		//TODO: Convert to JSON and return
 		return null;
 	}
 	
