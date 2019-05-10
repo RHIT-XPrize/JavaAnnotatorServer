@@ -13,6 +13,7 @@ public abstract class Annotator implements Route{
 	
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
+		System.out.println(request.body());
 		String jsonOutput = process(request.body());
 		setHeader(response);
 		sendResponse(response, jsonOutput);

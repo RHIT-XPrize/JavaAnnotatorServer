@@ -16,8 +16,8 @@ import phraseParsers.PhraseParser;
 public class Main {
 	public static void main(String[] args) {
 		ParseInput request = new GoogleNLPAPIRequest();
-		SpokenPhrase phrase = request.buildDependencyTree("Pick up the block left of this one.");
-		
+		System.out.println("Pick up this green block.");
+		SpokenPhrase phrase = request.buildDependencyTree("Pick up this green block.");
 		List<VerbalAction> actions = new ArrayList<>();
 		PhraseParser nameParser = new NameParser();
 		PhraseParser gestureParser = new GestureParser();

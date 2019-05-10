@@ -28,7 +28,8 @@ public class PickUpAction implements VerbalAction {
 	public boolean isAction(SpokenPhrase phrase) {
 		for(WordProperties word: phrase.sentence){
 			if(word.lemma.equalsIgnoreCase(WORDTWO) && word.partOfSpeech.equalsIgnoreCase(PARTOFSPEECHTWO)){
-				if(word.parent.lemma.equalsIgnoreCase(PARTOFSPEECHONE) && word.parent.partOfSpeech.equalsIgnoreCase(PARTOFSPEECHONE)){
+				if(word.parent.lemma.equalsIgnoreCase(WORDONE) && word.parent.partOfSpeech.equalsIgnoreCase(PARTOFSPEECHONE)){
+					System.out.println("here");
 					return true;
 				}
 			}
