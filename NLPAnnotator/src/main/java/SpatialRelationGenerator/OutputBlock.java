@@ -13,10 +13,10 @@ public class OutputBlock {
 	double y;
 	double z;
 	
-	public List<Integer> left;
-	public List<Integer> right;
-	public List<Integer> front;
-	public List<Integer> behind;
+	public String left;
+	public String right;
+	public String front;
+	public String behind;
 	
 	public OutputBlock(InnerBlock block){
 		this.id = block.id;
@@ -24,10 +24,10 @@ public class OutputBlock {
 		this.x = block.x;
 		this.y = block.y;
 		this.z = block.z;
-		this.left = toListOfIDs(block.left);
-		this.right = toListOfIDs(block.right);
-		this.behind = toListOfIDs(block.behind);
-		this.front = toListOfIDs(block.front);
+		this.left = toStringOfIDs(block.left);
+		this.right = toStringOfIDs(block.right);
+		this.behind = toStringOfIDs(block.behind);
+		this.front = toStringOfIDs(block.front);
 	}
 	
 	
@@ -38,18 +38,18 @@ public class OutputBlock {
 		this.z = z1;
 		this.name = name;
 		
-		this.left = new ArrayList<>();
-		this.right = new ArrayList<>();
-		this.front = new ArrayList<>();
-		this.behind = new ArrayList<>();
+		this.left = "";
+		this.right = "";
+		this.front = "";
+		this.behind = "";
 	}
 	
-	public List<Integer> toListOfIDs (PriorityQueue<BlockWrapper> blocks){
+	public String toStringOfIDs (PriorityQueue<BlockWrapper> blocks){
 		List<Integer> output = new ArrayList<>();
 		for(BlockWrapper b : blocks){
 			output.add(b.block.id);
 		}
-		return output;	
+		return output.toString();	
 	}
 	
 	public String toString(){

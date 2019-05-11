@@ -89,8 +89,8 @@ public class Grapher {
 		SphericalCoordinates po = new SphericalCoordinates(vector);
 		
 		
-		//PolarCoordinates po = new PolarCoordinates(current.x, current.y, current.z, other.x, other.y, other.z);
-		System.out.println("Current: " + current.name + " other: " + other.name+ "\n\tphi: " + po.getPhi() + " theta: " + po.getTheta());
+//		//PolarCoordinates po = new PolarCoordinates(current.x, current.y, current.z, other.x, other.y, other.z);
+//		System.out.println("Current: " + current.name + " other: " + other.name+ "\n\tphi: " + po.getPhi() + " theta: " + po.getTheta());
 		
 		double distance = Math.abs(po.getR());
 		BlockWrapper otherWrapper = new BlockWrapper(other, distance);
@@ -99,7 +99,6 @@ public class Grapher {
 		if (distance > MAX_DISTANCE){
 			System.out.println("out of range");
 		}else if (po.getTheta() < Math.PI/2) {
-			System.out.println("Hey");
 			if(po.getPhi() < Math.PI/4){
 				current.front.add(otherWrapper);
 				other.behind.add(currentWrapper);
@@ -111,7 +110,6 @@ public class Grapher {
 				other.front.add(currentWrapper);
 			}
 		}else{
-			System.out.println("Hello");
 			if(po.getPhi() < Math.PI/4){
 				current.behind.add(otherWrapper);
 				other.front.add(currentWrapper);
