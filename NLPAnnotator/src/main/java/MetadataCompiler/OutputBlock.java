@@ -1,4 +1,4 @@
-package SpatialRelationGenerator;
+package MetadataCompiler;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -18,7 +18,7 @@ public class OutputBlock {
 	public String front;
 	public String behind;
 	
-	public OutputBlock(InnerBlock block){
+	public OutputBlock(MetaBlock block){
 		this.id = block.id;
 		this.name = block.name;
 		this.x = block.x;
@@ -44,10 +44,10 @@ public class OutputBlock {
 		this.behind = "";
 	}
 	
-	public String toStringOfIDs (PriorityQueue<BlockWrapper> blocks){
+	public String toStringOfIDs (List<MetaBlock> blocks){
 		List<Integer> output = new ArrayList<>();
-		for(BlockWrapper b : blocks){
-			output.add(b.block.id);
+		for(MetaBlock b : blocks){
+			output.add(b.id);
 		}
 		return output.toString();	
 	}

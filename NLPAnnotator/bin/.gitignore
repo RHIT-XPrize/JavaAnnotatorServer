@@ -1,4 +1,10 @@
-/annotatorServer/
 /Actions/
+/Library.class
+/LibraryTest.class
+/SpatialRelationGenerator/
 /actionArtifacts/
+/annotatorServer/
+/dataStructures/
+/executables/
+/googleNLP/
 /phraseParsers/
