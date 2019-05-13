@@ -55,10 +55,10 @@ public class OutputBlock {
 	public String toString(){
 		StringBuilder out = new StringBuilder();
 		out.append("This is the block " + name + "\n");
-		out.append("\tLeft: "+ left);
-		out.append("\tRight: " + right);
-		out.append("\tFront: " + front);
-		out.append("\tBehind: " + behind);
+		out.append("\tLeft: "+ left.length());
+		out.append("\tRight: " + right.length());
+		out.append("\tFront: " + front.length());
+		out.append("\tBehind: " + behind.length());
 		
 		return out.toString();
 	}
