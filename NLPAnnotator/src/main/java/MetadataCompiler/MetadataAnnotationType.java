@@ -26,5 +26,4 @@ public class MetadataAnnotationType extends AnnotationType {
 		
 		return output;
 	}
-
 }
