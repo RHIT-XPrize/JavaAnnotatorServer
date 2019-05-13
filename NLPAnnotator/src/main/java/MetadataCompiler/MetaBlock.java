@@ -39,10 +39,10 @@ public class MetaBlock {
 		out.append("X: " + x + "\n");
 		out.append("Y: " + y + "\n");
 		out.append("Z: " + z + "\n");
-		out.append("\tLeft: "+ left);
-		out.append("\tRight: " + right);
-		out.append("\tFront: " + front);
-		out.append("\tBehind: " + behind);
+		out.append("\tLeft: "+ left.size());
+		out.append("\tRight: " + right.size());
+		out.append("\tFront: " + front.size());
+		out.append("\tBehind: " + behind.size());
 		
 		return out.toString();
 	}

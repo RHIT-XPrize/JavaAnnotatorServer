@@ -31,9 +31,10 @@ public class MetadataAnnotator extends Annotator{
 		MetadataCompiler compiler = new MetadataCompiler();
 		
 		MetaBlock output = compiler.chooseBlock(relationKeywords, degrees, startBlock);
-		
+
+		OutputBlock finalBlock = new OutputBlock(output);
 		//Convert to JSON
-		MetadataAnnotationType annotation= new MetadataAnnotationType("\"edu.rosehulman.aixprize.pipeline.types.MetadataSelectedBlock\"", output);
+		MetadataAnnotationType annotation= new MetadataAnnotationType("\"edu.rosehulman.aixprize.pipeline.types.MetadataSelectedBlock\"", finalBlock);
 		
 		return "{" + annotation.getName() + ": "+ annotation.getFields() + "}";
 	}
@@ -65,7 +66,7 @@ public class MetadataAnnotator extends Annotator{
 //			MetaBlock front = new MetaBlock(1,0,0,10, "front");
 //			blocksFromJson.put(1,front);
 //			
-//			MetaBlock leftFront = new MetaBlock(2,-7,0,11, "leftFront");
+//			MetaBlock leftFront = new MetaBlock(2,0,-7,11, "leftFront");
 //			blocksFromJson.put(2,leftFront);
 			//--------------------- test input ---------------------
 		
@@ -105,7 +106,7 @@ public class MetadataAnnotator extends Annotator{
 //		}
 		
 			//--------------------- test input ---------------------
-			blocksFromJson.get(0).front.add(blocksFromJson.get(1));
+			blocksFromJson.get(0).front.add(blocksFromJson.get(1));			
 			blocksFromJson.get(1).left.add(blocksFromJson.get(2));
 			
 				//--now breaks
@@ -118,7 +119,7 @@ public class MetadataAnnotator extends Annotator{
 				blocksFromJson.get(3).right.add(blocksFromJson.get(1));
 				blocksFromJson.get(3).front.add(blocksFromJson.get(2));
 			//--------------------- test input ---------------------
-		
+				
 //----------Find the starting block
 			
 			//--------------------- test input ---------------------

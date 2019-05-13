@@ -13,8 +13,8 @@ public class TestMain {
 		Annotator meta = new MetadataAnnotator();
 		post("/MetadataCompiler", meta);
 		
-		Annotator spacial = new SpatialRelationAnnotator();
-		post("/SpatialRelationGen", spacial);
+		Annotator spatial = new SpatialRelationAnnotator();
+		post("/SpatialRelationGen", spatial);
 	}
 
 }

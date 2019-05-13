@@ -9,9 +9,9 @@ import annotatorServer.AnnotationType;
 
 public class MetadataAnnotationType extends AnnotationType {
 	
-	MetaBlock chosenBlock;
+	OutputBlock chosenBlock;
 
-	public MetadataAnnotationType(String name, MetaBlock finalBlock) {
+	public MetadataAnnotationType(String name, OutputBlock finalBlock) {
 		super(name);
 		
 		this.chosenBlock = finalBlock;
