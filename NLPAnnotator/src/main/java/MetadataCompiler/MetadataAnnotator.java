@@ -30,7 +30,7 @@ public class MetadataAnnotator extends Annotator{
 		MetaBlock output = compiler.chooseBlock(relationKeywords, degrees, startBlock);
 		
 		//Convert to JSON
-		MetadataAnnotationType annotation= new MetadataAnnotationType("\"edu.rosehulman.aixprize.pipeline.types.MetadataBlock\"", output);
+		MetadataAnnotationType annotation= new MetadataAnnotationType("\"edu.rosehulman.aixprize.pipeline.types.MetadataSelectedBlock\"", output);
 		
 		return "{" + annotation.getName() + ": "+ annotation.getFields() + "}";
 	}

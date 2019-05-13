@@ -34,8 +34,6 @@ public class MetadataCompiler {
 	private Queue<MetaBlock> recursivlySearchForBlock(Queue<MetaBlock> initialBlockQueue, List<String> relationKeywords, List<Integer> degrees, int index) {
 		Queue<MetaBlock> blocks = null;
 		
-		System.out.println("Recursive: " + index);
-		
 		if(index == relationKeywords.size())
 		{
 			return initialBlockQueue;
@@ -51,7 +49,6 @@ public class MetadataCompiler {
 				blocks = recursivlySearchForBlock(nextQueue,relationKeywords,degrees,index+1);
 			} catch (Exception e) {
 				//no blocks found in the given direction
-				System.out.println("Exception: " + e.getMessage());
 			}
 		}
 		
@@ -61,7 +58,6 @@ public class MetadataCompiler {
 	public Queue<MetaBlock> useSpatialRelation (MetaBlock current, String spatialRelation,int degree) throws Exception{
 		Queue<MetaBlock> out = new LinkedList<MetaBlock>();
 		
-		System.out.println("CURRENT "+current);
 		//Get corresponding 
 		switch(spatialRelation){
 			case "LEFT":
