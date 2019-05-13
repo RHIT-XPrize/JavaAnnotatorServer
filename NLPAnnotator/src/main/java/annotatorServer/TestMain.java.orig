@@ -9,17 +9,20 @@ import SpatialRelationGenerator.SpatialRelationAnnotator;
 public class TestMain {
 
 	public static void main(String[] args) {
-		port(3001);
 <<<<<<< HEAD
-		Annotator handle = new NLPAnnotatorUnit();
-		post("/NLPUnit", handle);
-=======
+		port(3001);
 		Annotator meta = new MetadataAnnotator();
 		post("/MetadataCompiler", meta);
 		
 		Annotator spatial = new SpatialRelationAnnotator();
 		post("/SpatialRelationGen", spatial);
->>>>>>> f1db486f702122606cf8d39546df3b6561fe9501
+		Annotator handle = new NLPAnnotatorUnit();
+		post("/NLPUnit", handle);
+=======
+		port(3000);
+		Annotator speechToText = new SpeechToTextAnnotator();
+		post("/hello", speechToText);
+>>>>>>> 9c41a737a340a1acb4c15d2b62b2dbf014620f5e
 	}
 
 }

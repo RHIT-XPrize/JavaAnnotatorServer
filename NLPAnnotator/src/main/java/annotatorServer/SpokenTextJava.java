@@ -2,10 +2,10 @@ package annotatorServer;
 
 import java.util.List;
 
-public class SpokenTextType {
+public class SpokenTextJava {
 	String text;
 
-	public SpokenTextType(String text) {
+	public SpokenTextJava(String text) {
 		this.text = text;
 	}
 
