@@ -36,6 +36,9 @@ public class MetaBlock {
 	public String toString(){
 		StringBuilder out = new StringBuilder();
 		out.append("This is the block " + name + "\n");
+		out.append("X: " + x + "\n");
+		out.append("Y: " + y + "\n");
+		out.append("Z: " + z + "\n");
 		out.append("\tLeft: "+ left);
 		out.append("\tRight: " + right);
 		out.append("\tFront: " + front);

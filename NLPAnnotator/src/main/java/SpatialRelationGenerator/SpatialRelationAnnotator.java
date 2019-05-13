@@ -7,15 +7,14 @@ import java.util.Map;
 
 import com.google.gson.Gson;
 
+import MetadataCompiler.MetaBlock;
 import annotatorServer.Annotator;
 
 public class SpatialRelationAnnotator extends Annotator{
 
 	@Override
 	public String process(String request) {
-		System.out.println(request);
 		List<InnerBlock> blocks = parseJson(request);
-		
 		
 		Grapher grapher = new Grapher(blocks);
 		grapher.makeGraph(); //blocks spatial relationship fields are now populated
@@ -40,6 +39,12 @@ public class SpatialRelationAnnotator extends Annotator{
 		
 		InnerBlock front = new InnerBlock(1,0,0,10, "front");
 		output.add(front);
+		
+		InnerBlock leftFront = new InnerBlock(2,-7,0,11, "leftFront");
+		output.add(leftFront);
+		
+		InnerBlock secondleftFront = new InnerBlock(3,-8,0,14, "secondleftFront");
+		output.add(secondleftFront);
 		//--------------------- test input ---------------------
 		
 		return output;
