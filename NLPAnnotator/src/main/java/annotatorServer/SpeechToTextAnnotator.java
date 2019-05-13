@@ -8,7 +8,7 @@ public class SpeechToTextAnnotator extends Annotator{
 
 	private Gson gson;
 	private GoogleSpeechRecognition recognition;
-
+	private final String s = "\"edu.rosehulman.aixprize.pipeline.types.SpokenText\":";
 	public SpeechToTextAnnotator() {
 		this.gson = new Gson();
 		this.recognition = new GoogleSpeechRecognition();
@@ -16,9 +16,10 @@ public class SpeechToTextAnnotator extends Annotator{
 	
 	@Override
 	public String process(String request) {
+
 		String output = recognition.getResponse();
-		SpokenTextType type = new SpokenTextType(output);
-		return gson.toJson(type);
+		SpokenTextJava type = new SpokenTextJava(output);
+		return "{"+s+"["+gson.toJson(type)+"]"+"}";
 	}
 
 }

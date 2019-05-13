@@ -24,6 +24,7 @@ public class GoogleSpeechRecognition{
 	private JButton stop;
 	private GSpeechDuplex duplex;
 	private JTextArea response;
+	private SpeechResponseListener sp;
 
 	public GoogleSpeechRecognition() {
 
@@ -40,7 +41,7 @@ public class GoogleSpeechRecognition{
 	
 	private void SetUpGUI() {
 		
-		JFrame frame = new JFrame("Jarvis Speech API DEMO");
+		JFrame frame = new JFrame("Speech Recorded");
 		frame.setDefaultCloseOperation(3);
 		response = new JTextArea();
 		response.setEditable(false);
@@ -73,7 +74,7 @@ public class GoogleSpeechRecognition{
 
 	private void initializeActionListeners() {
 
-		SpeechResponseListener sp = new SpeechResponseListener(response);
+		this.sp = new SpeechResponseListener(response);
 		duplex.addResponseListener(sp);
 		
 		record.addActionListener(new ActionListener() {
@@ -105,7 +106,9 @@ public class GoogleSpeechRecognition{
 
 	
 	public String getResponse() {
-		return this.response.getText();
+		String output =  this.sp.getRecorded();
+		this.sp.clearRecorded();
+		return output;
 	}
 	
 

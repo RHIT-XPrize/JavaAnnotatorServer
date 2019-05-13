@@ -7,8 +7,8 @@ public class TestMain {
 
 	public static void main(String[] args) {
 		port(3000);
-		Annotator handle = new NLPAnnotatorUnit();
-		post("/NLPUnit", handle);
+		Annotator speechToText = new SpeechToTextAnnotator();
+		post("/hello", speechToText);
 	}
 
 }
