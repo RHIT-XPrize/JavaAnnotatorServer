@@ -40,12 +40,11 @@ public class PickUpAction implements VerbalAction {
 	@Override
 	public CommandArtifact parseImportant(SpokenPhrase phrase) {
 		String chain = blockModParser.findInformation(phrase);
-		List<String> chains = Arrays.asList(chain.split(","));
 		boolean usesGesture = false;
 		if(!gestureParser.findInformation(phrase).equals("")){
 			usesGesture = true;
 		}
-		return new PickUpArtifact(usesGesture, chains);
+		return new PickUpArtifact(usesGesture, chain);
 	}
 
 }

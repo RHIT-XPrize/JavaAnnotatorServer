@@ -6,8 +6,13 @@ import com.google.gson.Gson;
 public class TestMain {
 
 	public static void main(String[] args) {
+<<<<<<< HEAD
 		port(3001);
+		Annotator handle = new TestRoute();
+=======
+		port(3000);
 		Annotator handle = new NLPAnnotatorUnit();
+>>>>>>> 708b1c95e04f351c772157da130a0f1bdb5e8639
 		post("/NLPUnit", handle);
 	}
 

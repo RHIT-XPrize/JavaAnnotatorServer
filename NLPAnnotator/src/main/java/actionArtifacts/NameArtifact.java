@@ -8,9 +8,11 @@ public class NameArtifact implements CommandArtifact {
 
 	boolean usesGesture;
 	String assignedName;
-	List<String> mods;
+	String mods;
+	String command;
 	
-	public NameArtifact(boolean usesGesture, String assignedName, List<String> mods) {
+	public NameArtifact(boolean usesGesture, String assignedName, String mods) {
+		this.command = "Name";
 		this.usesGesture = usesGesture;
 		this.assignedName = assignedName;
 		this.mods = mods;
@@ -26,9 +28,8 @@ public class NameArtifact implements CommandArtifact {
 		String output = "{Name: ";
 		output += "Uses Gesture: " + usesGesture + ", ";
 		output += "Assigned Name: " + assignedName + ", ";
-		for(String str: mods){
-			output += "(Block: " + str + "), ";
-		}
+		output += "Mods(" + mods + "), ";
+
 		output += "}";
 		return output;
 	}

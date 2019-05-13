@@ -8,9 +8,11 @@ public class PickUpArtifact implements CommandArtifact {
 
 	boolean usesGesture;
 	String assignedName;
-	List<String> mods;
+	String mods;
+	String command;
 	
-	public PickUpArtifact(boolean usesGesture, List<String> mods) {
+	public PickUpArtifact(boolean usesGesture, String mods) {
+		this.command = "pick up";
 		this.usesGesture = usesGesture;
 		this.assignedName = "";
 		this.mods = mods;
@@ -25,10 +27,7 @@ public class PickUpArtifact implements CommandArtifact {
 	public String getString() {
 		String output = "{Pick Up: ";
 		output += "Uses Gesture: " + usesGesture + ", ";
-		for(String str: mods){
-			output += "(Block: " + str + "), ";
-		}
-		output += "}";
+		output += mods;
 		return output;
 	}
 

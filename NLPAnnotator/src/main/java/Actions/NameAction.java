@@ -39,12 +39,11 @@ public class NameAction implements VerbalAction {
 	public CommandArtifact parseImportant(SpokenPhrase phrase) {
 		String assignedName = nameParser.findInformation(phrase);
 		String chain = blockModParser.findInformation(phrase);
-		List<String> chains = Arrays.asList(chain.split(","));
 		boolean usesGesture = false;
 		if(!gestureParser.findInformation(phrase).equals("")){
 			usesGesture = true;
 		}
-		return new NameArtifact(usesGesture, assignedName, chains);
+		return new NameArtifact(usesGesture, assignedName, chain);
 		
 	}
 
