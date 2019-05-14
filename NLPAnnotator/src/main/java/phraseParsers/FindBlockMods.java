@@ -26,7 +26,7 @@ public class FindBlockMods implements PhraseParser{
 		for(int i = 0; i < phrase.sentence.size(); i ++){
 			WordProperties word = phrase.sentence.get(i);
 			String tempout = "";
-			if(word.lemma.equalsIgnoreCase("Block") && word.partOfSpeech.equalsIgnoreCase("Noun")){
+			if(word.partOfSpeech.equalsIgnoreCase("Noun")){
 				tempout += word.lemma + ">";
 				for(int j = i-1; j >= 0; j--){
 					WordProperties subWord = phrase.sentence.get(j);
@@ -42,7 +42,7 @@ public class FindBlockMods implements PhraseParser{
 						break;
 					}
 				}
-				if(!tempout.equals(word.lemma + ">")){
+				if(!tempout.equals(word.lemma + ">") || (word.isProper && word.isSingular)){
 					output += tempout + ",";					
 				}
 			}
