@@ -12,10 +12,12 @@ public class FindBlockMods implements PhraseParser{
 	List<String> directions;
 	public FindBlockMods() {
 		directions = new ArrayList<>();
-		directions.add("above");
-		directions.add("below");
+//		directions.add("above");
+//		directions.add("below");
 		directions.add("left");
 		directions.add("right");
+		directions.add("front");
+		directions.add("behind");
 	}
 	
 	@Override
@@ -23,23 +25,26 @@ public class FindBlockMods implements PhraseParser{
 		String output = "";
 		for(int i = 0; i < phrase.sentence.size(); i ++){
 			WordProperties word = phrase.sentence.get(i);
+			String tempout = "";
 			if(word.lemma.equalsIgnoreCase("Block") && word.partOfSpeech.equalsIgnoreCase("Noun")){
-				output += word.lemma + ">";
+				tempout += word.lemma + ">";
 				for(int j = i-1; j >= 0; j--){
 					WordProperties subWord = phrase.sentence.get(j);
 					if(subWord.partOfSpeech.equalsIgnoreCase("ADJ") && subWord.parent.equals(word)){
-						output += subWord.lemma + "|";
+						tempout += subWord.lemma + "|";
 					}
 					for(String dir: directions){
 						if(dir.equalsIgnoreCase(subWord.lemma)){
-							output += subWord.lemma + "|";
+							tempout += subWord.lemma + "|";
 						}
 					}
 					if(subWord.partOfSpeech.equalsIgnoreCase("NOUN")){
 						break;
 					}
 				}
-				output += ",";
+				if(!tempout.equals(word.lemma + ">")){
+					output += tempout + ",";					
+				}
 			}
 		}
 		return output;
