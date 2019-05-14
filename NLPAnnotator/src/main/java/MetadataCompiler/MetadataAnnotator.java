@@ -44,10 +44,59 @@ public class MetadataAnnotator extends Annotator{
 		Map<Integer, MetaBlock> blocksFromJson = new HashMap<>();
 		
 		JSONObject jsonObj = new JSONObject(request);
-		JSONArray jsonArray = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("SpatialRelationBlock");
 		
-		for(int i = 0; i < jsonArray.length(); i++){
-			JSONObject block = jsonArray.getJSONObject(i);
+		
+		
+//----------Find the relation keywords and degree
+			
+			//--------------------- test input ---------------------
+			this.degrees.add(1);
+			this.degrees.add(1);
+			
+			
+			//--------------------- test input ---------------------
+//			this.relationKeywords.add("FRONT");
+//			this.relationKeywords.add("LEFT");
+			
+		JSONArray spatialKeywords = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("NLPProcessor");
+		
+		String nounModifierPairs = spatialKeywords.getJSONObject(0).getString("mods");
+		
+		String[] arrayOfNouns = nounModifierPairs.split(",");
+		
+		
+		List<String> reverseOrderMods = new ArrayList<>();
+		for (int i = 0; i < arrayOfNouns.length; i++){
+			String[] nounModifiers = arrayOfNouns[i].split(">");
+			String noun = nounModifiers[0];
+			
+			String[] modifiers = nounModifiers[1].split("\\|");
+			
+			for(int j = 0; j < modifiers.length; j++){
+				String modifier = modifiers[j].toUpperCase();
+				if(modifier.equals("FRONT") || modifier.equals("LEFT") || modifiers.equals("BEHIND") || modifiers.equals("RIGHT")){
+					reverseOrderMods.add(modifier);
+				}
+			}
+		}
+		
+		for(int i = reverseOrderMods.size() - 1; i >= 0; i--){
+			this.relationKeywords.add(reverseOrderMods.get(i));	
+		}
+		
+
+		
+		
+		
+		
+		
+		
+	
+		
+		JSONArray blockData = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("SpatialRelationBlock");
+		
+		for(int i = 0; i < blockData.length(); i++){
+			JSONObject block = blockData.getJSONObject(i);
 			
 			//create block from the jsondata (SpacialRelationAnnotation)
 			MetaBlock blockForMap = new MetaBlock(block.getInt("id"),
@@ -60,8 +109,8 @@ public class MetadataAnnotator extends Annotator{
 		}
 		
 //----------Then Loop through JSON again, populate spatial relation lists of each block
-		for(int i = 0; i < jsonArray.length(); i++){
-			JSONObject block = jsonArray.getJSONObject(i);
+		for(int i = 0; i < blockData.length(); i++){
+			JSONObject block = blockData.getJSONObject(i);
 			
 			String[] directions = {"left", "right", "behind", "front"};
 			
@@ -99,16 +148,7 @@ public class MetadataAnnotator extends Annotator{
 			//--------------------- test input ---------------------
 			this.startBlock = blocksFromJson.get(0);
 			//--------------------- test input ---------------------
-		
-//----------Find the relation keywords and degree
-			
-			//--------------------- test input ---------------------
-			this.degrees.add(1);
-			this.degrees.add(1);
-			
-			this.relationKeywords.add("FRONT");
-			this.relationKeywords.add("LEFT");
-			//--------------------- test input ---------------------
+
 	}
 
 }
