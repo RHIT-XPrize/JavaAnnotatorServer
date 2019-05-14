@@ -18,7 +18,8 @@ dependencies {
     compile group: 'org.json', name: 'json', version: '20170516'
     compile group: 'com.google.cloud', name: 'google-cloud-speech', version: '0.8.0'
     compile group: 'com.google.guava', name: 'guava', version: '2.20'
-    compile group: 'com.github.goxr3plus', name: 'java-google-speech-api', version: 'V2.1'
+	
+
     
     
     // Use JUnit test framework
