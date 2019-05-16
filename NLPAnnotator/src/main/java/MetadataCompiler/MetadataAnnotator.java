@@ -68,16 +68,19 @@ public class MetadataAnnotator extends Annotator{
 		List<String> reverseOrderMods = new ArrayList<>();
 		for (int i = 0; i < arrayOfNouns.length; i++){
 			String[] nounModifiers = arrayOfNouns[i].split(">");
+			
 			String noun = nounModifiers[0];
 			
-			String[] modifiers = nounModifiers[1].split("\\|");
-			
-			for(int j = 0; j < modifiers.length; j++){
-				String modifier = modifiers[j].toUpperCase();
-				if(modifier.equals("FRONT") || modifier.equals("LEFT") || modifiers.equals("BEHIND") || modifiers.equals("RIGHT")){
-					reverseOrderMods.add(modifier);
+			if(nounModifiers[1] != ""){
+				String[] modifiers = nounModifiers[1].split("\\|");
+				for(int j = 0; j < modifiers.length; j++){
+					String modifier = modifiers[j].toUpperCase();
+					if(modifier.equals("FRONT") || modifier.equals("LEFT") || modifiers.equals("BEHIND") || modifiers.equals("RIGHT")){
+						reverseOrderMods.add(modifier);
+					}
 				}
 			}
+		
 		}
 		
 		for(int i = reverseOrderMods.size() - 1; i >= 0; i--){
