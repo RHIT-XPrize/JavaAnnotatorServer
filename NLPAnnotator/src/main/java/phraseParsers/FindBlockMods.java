@@ -42,7 +42,7 @@ public class FindBlockMods implements PhraseParser{
 						break;
 					}
 				}
-				if(!tempout.equals(word.lemma + ">") || (word.isProper && word.isSingular)){
+				if(!tempout.equals(word.lemma + ">")){
 					output += tempout + ",";					
 				}
 			}
