@@ -36,6 +36,7 @@ public class MetadataAnnotator extends Annotator{
 		//Convert to JSON
 		MetadataAnnotationType annotation= new MetadataAnnotationType("\"edu.rosehulman.aixprize.pipeline.types.MetadataSelectedBlock\"", finalBlock);
 		
+		System.out.println("{" + annotation.getName() + ": "+ annotation.getFields() + "}");
 		return "{" + annotation.getName() + ": "+ annotation.getFields() + "}";
 	}
 	
@@ -69,13 +70,13 @@ public class MetadataAnnotator extends Annotator{
 		for (int i = 0; i < arrayOfNouns.length; i++){
 			String[] nounModifiers = arrayOfNouns[i].split(">");
 			
-			String noun = nounModifiers[0];
+			String noun = nounModifiers[0];		
 			
 			if(nounModifiers[1] != ""){
 				String[] modifiers = nounModifiers[1].split("\\|");
 				for(int j = 0; j < modifiers.length; j++){
 					String modifier = modifiers[j].toUpperCase();
-					if(modifier.equals("FRONT") || modifier.equals("LEFT") || modifiers.equals("BEHIND") || modifiers.equals("RIGHT")){
+					if(modifier.equals("FRONT") || modifier.equals("LEFT") || modifier.equals("BEHIND") || modifier.equals("RIGHT")){
 						reverseOrderMods.add(modifier);
 					}
 				}

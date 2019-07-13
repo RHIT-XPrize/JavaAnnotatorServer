@@ -19,6 +19,10 @@ public class SpatialRelationAnnotator extends Annotator{
 		Grapher grapher = new Grapher(blocks);
 		grapher.makeGraph(); //blocks spatial relationship fields are now populated
 		
+		for(InnerBlock b: blocks){
+			System.out.println(b);
+		}
+		
 		List<OutputBlock> output = convertToOutputBlocks(blocks);
 		
 		
@@ -40,11 +44,17 @@ public class SpatialRelationAnnotator extends Annotator{
 		InnerBlock front = new InnerBlock(1,0,0,10, "front");
 		output.add(front);
 		
-		InnerBlock leftFront = new InnerBlock(2,-7,0,11, "leftFront");
-		output.add(leftFront);
+		InnerBlock left = new InnerBlock(2,-7,0,-1, "left");
+		output.add(left);
 		
-		InnerBlock secondleftFront = new InnerBlock(3,-8,0,14, "secondleftFront");
-		output.add(secondleftFront);
+		InnerBlock right = new InnerBlock(3,5,0,1, "right");
+		output.add(right);
+		
+		InnerBlock behind = new InnerBlock(4,0,0,-5, "behind");
+		output.add(behind);
+		
+		InnerBlock faraway = new InnerBlock(5,-1000,0,1, "faraway");
+		output.add(faraway);
 		//--------------------- test input ---------------------
 		
 		return output;

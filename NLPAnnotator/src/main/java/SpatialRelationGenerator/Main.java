@@ -16,13 +16,13 @@ public class Main {
 		
 		InnerBlock front = new InnerBlock(1,0,0,10, "front");
 		
-		InnerBlock behind = new InnerBlock(2,0, 0, -5, "behind");
+		InnerBlock left = new InnerBlock(2,-7, 0, -1, "left");
 		
 		InnerBlock right = new InnerBlock(3,5, 0, 1, "right");
 		
-		InnerBlock left = new InnerBlock(4,-7, 0, -1, "left");
+		InnerBlock behind = new InnerBlock(4,0, 0, -5, "behind");
 		
-		InnerBlock farAway = new InnerBlock(5, -1000, 0, 1, "faraway");
+		InnerBlock far = new InnerBlock(5,-1000, 0, 1, "faraway");
 		
 		List<InnerBlock> blocks  = new ArrayList<>();
 		
@@ -31,7 +31,7 @@ public class Main {
 		blocks.add(behind);
 		blocks.add(right);
 		blocks.add(left);
-		blocks.add(farAway);
+		blocks.add(far);
 		
 		Grapher grapher = new Grapher(blocks);
 		
