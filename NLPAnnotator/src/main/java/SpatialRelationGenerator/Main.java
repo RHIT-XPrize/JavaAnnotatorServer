@@ -33,7 +33,7 @@ public class Main {
 		blocks.add(left);
 		blocks.add(far);
 		
-		Grapher grapher = new Grapher(blocks);
+		Grapher grapher = new Grapher(blocks,2);
 		
 		grapher.makeGraph();
 		

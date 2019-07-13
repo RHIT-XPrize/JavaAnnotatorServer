@@ -12,11 +12,13 @@ import annotatorServer.Annotator;
 
 public class SpatialRelationAnnotator extends Annotator{
 
+	double WIDTH_OF_WORKING_SPACE = 2;
+	
 	@Override
 	public String process(String request) {
 		List<InnerBlock> blocks = parseJson(request);
 		
-		Grapher grapher = new Grapher(blocks);
+		Grapher grapher = new Grapher(blocks, WIDTH_OF_WORKING_SPACE);
 		grapher.makeGraph(); //blocks spatial relationship fields are now populated
 		
 		for(InnerBlock b: blocks){
@@ -38,22 +40,22 @@ public class SpatialRelationAnnotator extends Annotator{
 		//TODO: convert to InnerBlocks
 		
 		//--------------------- test input ---------------------
-		InnerBlock origin = new InnerBlock(0,0,0,0, "origin");
+		InnerBlock origin = new InnerBlock(1,0,0,1.5, "origin");
 		output.add(origin);
 		
-		InnerBlock front = new InnerBlock(1,0,0,10, "front");
+		InnerBlock front = new InnerBlock(3,0.3,0,2.70, "front");
 		output.add(front);
 		
-		InnerBlock left = new InnerBlock(2,-7,0,-1, "left");
+		InnerBlock left = new InnerBlock(5,-0.98,0,1.69, "left");
 		output.add(left);
 		
-		InnerBlock right = new InnerBlock(3,5,0,1, "right");
+		InnerBlock right = new InnerBlock(4,1.20,0,1.30, "right");
 		output.add(right);
 		
-		InnerBlock behind = new InnerBlock(4,0,0,-5, "behind");
+		InnerBlock behind = new InnerBlock(2,0.30,0,1.10, "behind");
 		output.add(behind);
 		
-		InnerBlock faraway = new InnerBlock(5,-1000,0,1, "faraway");
+		InnerBlock faraway = new InnerBlock(6,-3.00,0,1.25, "faraway");
 		output.add(faraway);
 		//--------------------- test input ---------------------
 		
