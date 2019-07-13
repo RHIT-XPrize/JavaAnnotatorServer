@@ -4,6 +4,10 @@ import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import MetadataCompiler.MetaBlock;
+import MetadataCompiler.MetadataCompiler;
+import MetadataCompiler.OutputBlock;
+
 public class Main {
 	
 	
@@ -12,17 +16,17 @@ public class Main {
 
 	public static void main(String[] args) throws JsonProcessingException{
 		
-		InnerBlock origin = new InnerBlock(0,0,0,0, "origin");
+		InnerBlock origin = new InnerBlock(1,0,0,1.5, "origin");
 		
-		InnerBlock front = new InnerBlock(1,0,0,10, "front");
+		InnerBlock front = new InnerBlock(3,0.3,0,2.70, "front");
 		
-		InnerBlock left = new InnerBlock(2,-7, 0, -1, "left");
+		InnerBlock left = new InnerBlock(5,-0.98,0,1.69, "left");
 		
-		InnerBlock right = new InnerBlock(3,5, 0, 1, "right");
+		InnerBlock right = new InnerBlock(4,1.20,0,1.30, "right");
 		
-		InnerBlock behind = new InnerBlock(4,0, 0, -5, "behind");
+		InnerBlock behind = new InnerBlock(2,0.30,0,1.10, "behind");
 		
-		InnerBlock far = new InnerBlock(5,-1000, 0, 1, "faraway");
+		InnerBlock faraway = new InnerBlock(6,-3.00,0,1.25, "faraway");
 		
 		List<InnerBlock> blocks  = new ArrayList<>();
 		
@@ -31,7 +35,7 @@ public class Main {
 		blocks.add(behind);
 		blocks.add(right);
 		blocks.add(left);
-		blocks.add(far);
+		blocks.add(faraway);
 		
 		Grapher grapher = new Grapher(blocks,2);
 		
@@ -44,7 +48,6 @@ public class Main {
 		System.out.println("\n\n\nYEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEET\n\n\n\n");
 		
 		System.out.println(grapher.generateAnnotationResponse());
-		
-				
+
 	}
 }

@@ -26,13 +26,15 @@ public class MetadataAnnotator extends Annotator{
 
 	@Override
 	public String process(String request) {
+		System.out.println("INSIDE METADATA ANNOTATOR");
 		parseJson(request);
 		
 		MetadataCompiler compiler = new MetadataCompiler();
 		
 		MetaBlock output = compiler.chooseBlock(relationKeywords, degrees, startBlock);
+		double pathConfidence = compiler.getPathConfidenceValue();
 
-		OutputBlock finalBlock = new OutputBlock(output);
+		OutputBlock finalBlock = new OutputBlock(output,pathConfidence);
 		//Convert to JSON
 		MetadataAnnotationType annotation= new MetadataAnnotationType("\"edu.rosehulman.aixprize.pipeline.types.MetadataSelectedBlock\"", finalBlock);
 		
@@ -57,7 +59,6 @@ public class MetadataAnnotator extends Annotator{
 			
 			//--------------------- test input ---------------------
 //			this.relationKeywords.add("FRONT");
-//			this.relationKeywords.add("LEFT");
 			
 		JSONArray spatialKeywords = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("NLPProcessor");
 		
@@ -88,15 +89,6 @@ public class MetadataAnnotator extends Annotator{
 			this.relationKeywords.add(reverseOrderMods.get(i));	
 		}
 		
-
-		
-		
-		
-		
-		
-		
-	
-		
 		JSONArray blockData = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("SpatialRelationBlock");
 		
 		for(int i = 0; i < blockData.length(); i++){
@@ -123,23 +115,29 @@ public class MetadataAnnotator extends Annotator{
 				String leftList = block.getString(dir);
 				leftList = leftList.substring(1,leftList.length()-1);
 				
-				String[] arrOfStr = leftList.split(", ");
+				leftList.replaceAll("(", "");
+				
+				String[] arrOfStr = leftList.split("),");
+				
 				
 				for(String s : arrOfStr)
 				{
 					if(!s.equals("")){
+						String[] idAndConfidence = s.split(",");
+						MetablockConfidenceTuple toadd = new MetablockConfidenceTuple(blocksFromJson.get(Integer.parseInt(idAndConfidence[0])),Double.parseDouble(idAndConfidence[1]));
 						switch(dir){
 							case "front":
-								blocksFromJson.get(i).front.add(blocksFromJson.get(Integer.parseInt(s)));
+								
+								blocksFromJson.get(i).front.add(toadd);
 								break;
 							case "left":
-								blocksFromJson.get(i).left.add(blocksFromJson.get(Integer.parseInt(s)));
+								blocksFromJson.get(i).left.add(toadd);
 								break;
 							case "right":
-								blocksFromJson.get(i).right.add(blocksFromJson.get(Integer.parseInt(s)));
+								blocksFromJson.get(i).right.add(toadd);
 								break;
 							case "behind":
-								blocksFromJson.get(i).behind.add(blocksFromJson.get(Integer.parseInt(s)));
+								blocksFromJson.get(i).behind.add(toadd);
 								break;
 						}
 					}
@@ -154,5 +152,4 @@ public class MetadataAnnotator extends Annotator{
 			//--------------------- test input ---------------------
 
 	}
-
 }
