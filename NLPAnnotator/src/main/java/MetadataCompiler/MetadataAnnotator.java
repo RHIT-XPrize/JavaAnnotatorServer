@@ -91,8 +91,6 @@ public class MetadataAnnotator extends Annotator{
 		
 		JSONArray blockData = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("SpatialRelationBlock");
 		
-		System.out.println("The blockdata is " + blockData);
-		
 		for(int i = 0; i < blockData.length(); i++){
 			JSONObject block = blockData.getJSONObject(i);
 			
@@ -105,8 +103,6 @@ public class MetadataAnnotator extends Annotator{
 			
 			blocksFromJson.put(blockForMap.id,blockForMap);
 		}
-		
-		System.out.println("first time " + blocksFromJson);
 		
 //----------Then Loop through JSON again, populate spatial relation lists of each block
 		for(int i = 0; i < blockData.length(); i++){
