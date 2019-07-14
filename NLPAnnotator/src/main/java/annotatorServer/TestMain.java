@@ -17,7 +17,7 @@ public class TestMain {
 		post("/MetadataCompiler", metaData);
 		Annotator spatial = new SpatialRelationAnnotator();
 		post("/SpatialRelationGen", spatial);
-//		Annotator handle = new NLPAnnotatorUnit();
-//		post("/NLPUnit", handle);
+		Annotator handle = new NLPAnnotatorUnit();
+		post("/NLPUnit", handle);
 	}
 }
