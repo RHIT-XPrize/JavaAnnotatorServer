@@ -45,9 +45,10 @@ public class OutputBlock {
 	}
 	
 	public String toStringOfIDs (PriorityQueue<BlockWrapper> blocks){
-		List<Integer> output = new ArrayList<>();
+		List<String> output = new ArrayList<>();
 		for(BlockWrapper b : blocks){
-			output.add(b.block.id);
+			ConfidenceTuple tuple = new ConfidenceTuple(b.block.id, b.confidence);
+			output.add(tuple.toString());
 		}
 		return output.toString();	
 	}
@@ -61,5 +62,21 @@ public class OutputBlock {
 		out.append("\tBehind: " + behind);
 		
 		return out.toString();
+	}
+	
+	public class ConfidenceTuple {
+		
+		public int blockId;
+		public double confidence;
+		
+		public ConfidenceTuple(int blockId, double confidence) {
+			this.blockId = blockId;
+			this.confidence = confidence;
+		}
+		
+		@Override
+		public String toString() {
+			return "(" + this.blockId + "," + this.confidence + ")"; 
+		}
 	}
 }
