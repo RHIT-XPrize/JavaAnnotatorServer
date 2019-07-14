@@ -55,7 +55,6 @@ public class MetadataCompiler {
 		while(!initialBlockQueue.isEmpty() && blocks == null) 
 		{
 			MetablockConfidenceTuple currentBlock = initialBlockQueue.poll();
-			this.pathConfidenceValues.push(currentBlock.confidence);
 			
 			try {
 				Queue<MetablockConfidenceTuple> nextQueue = useSpatialRelation(currentBlock,relationKeywords.get(index),degrees.get(index));
@@ -101,6 +100,9 @@ public class MetadataCompiler {
 			default:
 				throw new Exception("Unrecoginized spatial relation");
 		}
+		
+		this.pathConfidenceValues.push(out.peek().confidence);
+		
 		//Figure get to the ith block away, where i is the degree.
 		int i = degree;
 		while(i > 1){
