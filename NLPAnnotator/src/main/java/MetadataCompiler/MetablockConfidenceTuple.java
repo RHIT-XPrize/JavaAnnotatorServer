@@ -9,4 +9,8 @@ public class MetablockConfidenceTuple {
 		this.confidence = confidence;
 		this.metaBlock = metaBlock;
 	}
+	
+	public String toString(){
+		return metaBlock.toString() + "\nconfidence: " +confidence;
+	}
 }

@@ -40,22 +40,22 @@ public class SpatialRelationAnnotator extends Annotator{
 		//TODO: convert to InnerBlocks
 		
 		//--------------------- test input ---------------------
-		InnerBlock origin = new InnerBlock(1,0,0,1.5, "origin");
+		InnerBlock origin = new InnerBlock(0,0,0,1.5, "origin");
 		output.add(origin);
 		
-		InnerBlock front = new InnerBlock(3,0.3,0,2.70, "front");
+		InnerBlock front = new InnerBlock(2,0.3,0,2.70, "front");
 		output.add(front);
 		
-		InnerBlock left = new InnerBlock(5,-0.98,0,1.69, "left");
+		InnerBlock left = new InnerBlock(4,-0.98,0,1.69, "left");
 		output.add(left);
 		
-		InnerBlock right = new InnerBlock(4,1.20,0,1.30, "right");
+		InnerBlock right = new InnerBlock(3,1.20,0,1.30, "right");
 		output.add(right);
 		
-		InnerBlock behind = new InnerBlock(2,0.30,0,1.10, "behind");
+		InnerBlock behind = new InnerBlock(1,0.30,0,1.10, "behind");
 		output.add(behind);
 		
-		InnerBlock faraway = new InnerBlock(6,-3.00,0,1.25, "faraway");
+		InnerBlock faraway = new InnerBlock(5,-3.00,0,1.25, "faraway");
 		output.add(faraway);
 		//--------------------- test input ---------------------
 		
