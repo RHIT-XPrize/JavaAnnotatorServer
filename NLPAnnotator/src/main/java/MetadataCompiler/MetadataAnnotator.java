@@ -57,36 +57,36 @@ public class MetadataAnnotator extends Annotator{
 			
 			
 			//--------------------- test input ---------------------
-		this.relationKeywords.add("FRONT");
+//		this.relationKeywords.add("FRONT");
 			
-//		JSONArray spatialKeywords = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("NLPProcessor");
-//		
-//		String nounModifierPairs = spatialKeywords.getJSONObject(0).getString("mods");
-//		
-//		String[] arrayOfNouns = nounModifierPairs.split(",");
-//		
-//		
-//		List<String> reverseOrderMods = new ArrayList<>();
-//		for (int i = 0; i < arrayOfNouns.length; i++){
-//			String[] nounModifiers = arrayOfNouns[i].split(">");
-//			
-//			String noun = nounModifiers[0];		
-//			
-//			if(nounModifiers[1] != ""){
-//				String[] modifiers = nounModifiers[1].split("\\|");
-//				for(int j = 0; j < modifiers.length; j++){
-//					String modifier = modifiers[j].toUpperCase();
-//					if(modifier.equals("FRONT") || modifier.equals("LEFT") || modifier.equals("BEHIND") || modifier.equals("RIGHT")){
-//						reverseOrderMods.add(modifier);
-//					}
-//				}
-//			}
-//		
-//		}
-//		
-//		for(int i = reverseOrderMods.size() - 1; i >= 0; i--){
-//			this.relationKeywords.add(reverseOrderMods.get(i));	
-//		}
+		JSONArray spatialKeywords = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("NLPProcessor");
+		
+		String nounModifierPairs = spatialKeywords.getJSONObject(0).getString("mods");
+		
+		String[] arrayOfNouns = nounModifierPairs.split(",");
+		
+		
+		List<String> reverseOrderMods = new ArrayList<>();
+		for (int i = 0; i < arrayOfNouns.length; i++){
+			String[] nounModifiers = arrayOfNouns[i].split(">");
+			
+			String noun = nounModifiers[0];		
+			
+			if(nounModifiers[1] != ""){
+				String[] modifiers = nounModifiers[1].split("\\|");
+				for(int j = 0; j < modifiers.length; j++){
+					String modifier = modifiers[j].toUpperCase();
+					if(modifier.equals("FRONT") || modifier.equals("LEFT") || modifier.equals("BEHIND") || modifier.equals("RIGHT")){
+						reverseOrderMods.add(modifier);
+					}
+				}
+			}
+		
+		}
+		
+		for(int i = reverseOrderMods.size() - 1; i >= 0; i--){
+			this.relationKeywords.add(reverseOrderMods.get(i));	
+		}
 		
 		
 		JSONArray blockData = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("SpatialRelationBlock");
