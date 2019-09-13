@@ -18,6 +18,8 @@ public class SpeechToTextAnnotator extends Annotator{
 	public String process(String request) {
 
 		String output = recognition.getResponse();
+		// you can comment the following line out if you care what it says
+		output = "Name the block to the left of the block in front of that block Jeff.";
 		SpokenTextJava type = new SpokenTextJava(output);
 		return "{"+s+"["+gson.toJson(type)+"]"+"}";
 	}
