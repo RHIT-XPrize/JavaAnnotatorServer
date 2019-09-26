@@ -16,7 +16,7 @@ public class BlockWrapper implements Comparable<BlockWrapper>{
 
 	@Override
 	public int compareTo(BlockWrapper otherBlock) {
-		return (int) (this.distance - otherBlock.distance);
+		return (int) ((this.distance - otherBlock.distance) * 100);
 	}
 	
 	@Override

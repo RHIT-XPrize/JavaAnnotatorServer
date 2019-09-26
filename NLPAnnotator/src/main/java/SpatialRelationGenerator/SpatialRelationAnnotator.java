@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.google.gson.Gson;
 
 import MetadataCompiler.MetaBlock;
@@ -37,26 +40,45 @@ public class SpatialRelationAnnotator extends Annotator{
 	public List<InnerBlock> parseJson (String request){
 		List<InnerBlock> output = new ArrayList<InnerBlock>();
 		
-		//TODO: convert to InnerBlocks
+		//TODO: Parse blocks from JSON
+		JSONObject jsonObj = new JSONObject(request);
+		JSONArray blockData = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("DetectedBlock");
 		
+		System.out.println("SPACIAL RELATION DATA");
+		System.out.println(blockData);
+		
+		for(int i = 0; i < blockData.length(); i++){
+			JSONObject block = blockData.getJSONObject(i);
+			
+			//create block from the jsondata (Block detection annotator)			
+			InnerBlock innerBlock = new InnerBlock(block.getInt("id"),
+					block.getDouble("camera_space_center_X"),
+					block.getDouble("camera_space_center_Y"),
+					block.getDouble("camera_space_depth"),
+					""+block.getInt("id"));
+			
+			output.add(innerBlock);
+		}
+		
+		System.out.println("AFTER SPACIAL RELATION DATA");
 		//--------------------- test input ---------------------
-		InnerBlock origin = new InnerBlock(0,0,0,1.5, "origin");
-		output.add(origin);
-		
-		InnerBlock front = new InnerBlock(2,0.3,0,2.70, "front");
-		output.add(front);
-		
-		InnerBlock left = new InnerBlock(4,-0.98,0,1.69, "left");
-		output.add(left);
-		
-		InnerBlock right = new InnerBlock(3,1.20,0,1.30, "right");
-		output.add(right);
-		
-		InnerBlock behind = new InnerBlock(1,0.30,0,1.10, "behind");
-		output.add(behind);
-		
-		InnerBlock faraway = new InnerBlock(5,-3.00,0,1.25, "faraway");
-		output.add(faraway);
+//		InnerBlock origin = new InnerBlock(0,0,0,1.5, "origin");
+//		output.add(origin);
+//		
+//		InnerBlock front = new InnerBlock(2,0.3,0,2.70, "front");
+//		output.add(front);
+//		
+//		InnerBlock left = new InnerBlock(4,-0.3,0,1.69, "left");
+//		output.add(left);
+//		
+//		InnerBlock right = new InnerBlock(3,0.5,0,1.40, "right");
+//		output.add(right);
+//		
+//		InnerBlock behind = new InnerBlock(1,0.20,0,1.10, "behind");
+//		output.add(behind);
+//		
+//		InnerBlock faraway = new InnerBlock(5,-1.00,0,1.25, "faraway");
+//		output.add(faraway);
 		//--------------------- test input ---------------------
 		
 		return output;
