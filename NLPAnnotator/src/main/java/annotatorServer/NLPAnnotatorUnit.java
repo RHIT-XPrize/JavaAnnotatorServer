@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 
 import Actions.NameAction;
 import Actions.PickUpAction;
+import Actions.PutDown;
 import Actions.VerbalAction;
 import dataStructures.SpokenPhrase;
 import googleNLP.GoogleNLPAPIRequest;
@@ -35,6 +36,7 @@ public class NLPAnnotatorUnit extends Annotator {
 		
 		actions.add(new NameAction(nameParser, gestureParser, findBlocksParser));
 		actions.add(new PickUpAction(gestureParser, findBlocksParser));
+		actions.add(new PutDown(gestureParser, findBlocksParser));
 	}
 	
 	@Override
