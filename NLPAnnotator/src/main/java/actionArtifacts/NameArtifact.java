@@ -28,7 +28,7 @@ public class NameArtifact implements CommandArtifact {
 		String output = "{Name: ";
 		output += "Uses Gesture: " + usesGesture + ", ";
 		output += "Assigned Name: " + assignedName + ", ";
-		output += "Mods(" + mods + "), ";
+		output += "Mods(" + mods + ")";
 
 		output += "}";
 		return output;

@@ -27,7 +27,9 @@ public class PickUpArtifact implements CommandArtifact {
 	public String getString() {
 		String output = "{Pick Up: ";
 		output += "Uses Gesture: " + usesGesture + ", ";
-		output += mods;
+		output += "Mods(" + mods + ")";
+
+		output += "}";
 		return output;
 	}
 
