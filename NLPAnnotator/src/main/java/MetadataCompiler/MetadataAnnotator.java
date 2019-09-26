@@ -51,45 +51,49 @@ public class MetadataAnnotator extends Annotator{
 		
 //----------Find the relation keywords and degree
 			
-			//--------------------- test input ---------------------
+		//--------------------- test input ---------------------
 		this.degrees.add(1);
-		//	this.degrees.add(1);
-			
-			
-			//--------------------- test input ---------------------
-//		this.relationKeywords.add("FRONT");
-			
-		JSONArray spatialKeywords = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("NLPProcessor");
+		//--------------------- test input ---------------------
 		
-		String nounModifierPairs = spatialKeywords.getJSONObject(0).getString("mods");
+		//_________________WAITING ON NLP TO BE FIXED_____________________
+//		JSONArray spatialKeywords = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("NLPProcessor");
+//		
+//		String nounModifierPairs = spatialKeywords.getJSONObject(0).getString("mods");
+//		
+//		String[] arrayOfNouns = nounModifierPairs.split(",");
+//		
+//		
+//		List<String> reverseOrderMods = new ArrayList<>();
+//		for (int i = 0; i < arrayOfNouns.length; i++){
+//			String[] nounModifiers = arrayOfNouns[i].split(">");
+//			
+//			String noun = nounModifiers[0];		
+//			
+//			if(nounModifiers[1] != ""){
+//				String[] modifiers = nounModifiers[1].split("\\|");
+//				for(int j = 0; j < modifiers.length; j++){
+//					String modifier = modifiers[j].toUpperCase();
+//					if(modifier.equals("FRONT") || modifier.equals("LEFT") || modifier.equals("BEHIND") || modifier.equals("RIGHT")){
+//						reverseOrderMods.add(modifier);
+//					}
+//				}
+//			}
+//		
+//		}
+//		
+//		for(int i = reverseOrderMods.size() - 1; i >= 0; i--){
+//			this.relationKeywords.add(reverseOrderMods.get(i));	
+//		}
 		
-		String[] arrayOfNouns = nounModifierPairs.split(",");
+		//_______________________TEMPORARY UNTIL NLP WORKING_____________________
 		
+		this.relationKeywords.add("LEFT");
 		
-		List<String> reverseOrderMods = new ArrayList<>();
-		for (int i = 0; i < arrayOfNouns.length; i++){
-			String[] nounModifiers = arrayOfNouns[i].split(">");
-			
-			String noun = nounModifiers[0];		
-			
-			if(nounModifiers[1] != ""){
-				String[] modifiers = nounModifiers[1].split("\\|");
-				for(int j = 0; j < modifiers.length; j++){
-					String modifier = modifiers[j].toUpperCase();
-					if(modifier.equals("FRONT") || modifier.equals("LEFT") || modifier.equals("BEHIND") || modifier.equals("RIGHT")){
-						reverseOrderMods.add(modifier);
-					}
-				}
-			}
-		
-		}
-		
-		for(int i = reverseOrderMods.size() - 1; i >= 0; i--){
-			this.relationKeywords.add(reverseOrderMods.get(i));	
-		}
-		
+		//_____________________________________________________________________
+		System.out.println("Before blocks");
 		
 		JSONArray blockData = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("SpatialRelationBlock");
+		System.out.println("Blocks: " + blockData);
 		
 		for(int i = 0; i < blockData.length(); i++){
 			JSONObject block = blockData.getJSONObject(i);
@@ -104,9 +108,10 @@ public class MetadataAnnotator extends Annotator{
 			blocksFromJson.put(blockForMap.id,blockForMap);
 		}
 		
+		System.out.println("After blocks");
 //----------Then Loop through JSON again, populate spatial relation lists of each block
-		for(int i = 0; i < blockData.length(); i++){
-			JSONObject block = blockData.getJSONObject(i);
+		for(int i = 1; i <= blockData.length(); i++){
+			JSONObject block = blockData.getJSONObject(i-1);
 			
 			String[] directions = {"left", "right", "behind", "front"};
 			
@@ -143,10 +148,25 @@ public class MetadataAnnotator extends Annotator{
 			}
 		}
 //----------Find the starting block
+		System.out.println("Before pointing");
+		JSONArray pointingData = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("Pointing");
+		
+		double maxConf = 0;
+		int originId = 1;
+		
+		for(int i = 0; i < pointingData.length(); i++){
+			JSONObject block = pointingData.getJSONObject(i);
 			
-		//--------------------- test input ---------------------
-		this.startBlock = blocksFromJson.get(0);
-		//--------------------- test input ---------------------
+			if(block.getDouble("confidence") > maxConf){
+				maxConf = block.getDouble("confidence");
+				originId = block.getInt("id");
+			}
+		}
+		
+		//-----select start block------
+		this.startBlock = blocksFromJson.get(originId);
+		System.out.println("BLOCKS: " + blocksFromJson);
+		System.out.println("ORIGIN: " + originId);
 
 	}
 }
