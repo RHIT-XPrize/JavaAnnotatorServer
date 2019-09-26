@@ -31,11 +31,13 @@ public class MetadataAnnotator extends Annotator{
 		MetadataCompiler compiler = new MetadataCompiler();
 		
 		MetaBlock output = compiler.chooseBlock(relationKeywords, degrees, startBlock);
+		double pathConfidence = compiler.getPathConfidenceValue();
 
-		OutputBlock finalBlock = new OutputBlock(output);
+		OutputBlock finalBlock = new OutputBlock(output,pathConfidence);
 		//Convert to JSON
 		MetadataAnnotationType annotation= new MetadataAnnotationType("\"edu.rosehulman.aixprize.pipeline.types.MetadataSelectedBlock\"", finalBlock);
 		
+		System.out.println("{" + annotation.getName() + ": "+ annotation.getFields() + "}");
 		return "{" + annotation.getName() + ": "+ annotation.getFields() + "}";
 	}
 	
@@ -50,13 +52,12 @@ public class MetadataAnnotator extends Annotator{
 //----------Find the relation keywords and degree
 			
 			//--------------------- test input ---------------------
-			this.degrees.add(1);
-			this.degrees.add(1);
+		this.degrees.add(1);
+		//	this.degrees.add(1);
 			
 			
 			//--------------------- test input ---------------------
-//			this.relationKeywords.add("FRONT");
-//			this.relationKeywords.add("LEFT");
+//		this.relationKeywords.add("FRONT");
 			
 		JSONArray spatialKeywords = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("NLPProcessor");
 		
@@ -69,13 +70,13 @@ public class MetadataAnnotator extends Annotator{
 		for (int i = 0; i < arrayOfNouns.length; i++){
 			String[] nounModifiers = arrayOfNouns[i].split(">");
 			
-			String noun = nounModifiers[0];
+			String noun = nounModifiers[0];		
 			
 			if(nounModifiers[1] != ""){
 				String[] modifiers = nounModifiers[1].split("\\|");
 				for(int j = 0; j < modifiers.length; j++){
 					String modifier = modifiers[j].toUpperCase();
-					if(modifier.equals("FRONT") || modifier.equals("LEFT") || modifiers.equals("BEHIND") || modifiers.equals("RIGHT")){
+					if(modifier.equals("FRONT") || modifier.equals("LEFT") || modifier.equals("BEHIND") || modifier.equals("RIGHT")){
 						reverseOrderMods.add(modifier);
 					}
 				}
@@ -87,14 +88,6 @@ public class MetadataAnnotator extends Annotator{
 			this.relationKeywords.add(reverseOrderMods.get(i));	
 		}
 		
-
-		
-		
-		
-		
-		
-		
-	
 		
 		JSONArray blockData = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("SpatialRelationBlock");
 		
@@ -103,9 +96,9 @@ public class MetadataAnnotator extends Annotator{
 			
 			//create block from the jsondata (SpacialRelationAnnotation)
 			MetaBlock blockForMap = new MetaBlock(block.getInt("id"),
-					block.getInt("x"),
-					block.getInt("y"),
-					block.getInt("z"),
+					block.getDouble("x"),
+					block.getDouble("y"),
+					block.getDouble("z"),
 					block.getString("name"));
 			
 			blocksFromJson.put(blockForMap.id,blockForMap);
@@ -119,39 +112,41 @@ public class MetadataAnnotator extends Annotator{
 			
 			for(String dir : directions)
 			{
-				String leftList = block.getString(dir);
+				String leftList = block.getString(dir).trim();
 				leftList = leftList.substring(1,leftList.length()-1);
 				
-				String[] arrOfStr = leftList.split(", ");
+				leftList = leftList.replaceAll("\\(", "");
+				leftList = leftList.replaceAll("\\),", ")");
+				String[] arrOfStr = leftList.split("\\)");
 				
 				for(String s : arrOfStr)
 				{
 					if(!s.equals("")){
+						String[] idAndConfidence = s.trim().split(",");
+						MetablockConfidenceTuple toadd = new MetablockConfidenceTuple(blocksFromJson.get(Integer.parseInt(idAndConfidence[0])),Double.parseDouble(idAndConfidence[1]));
 						switch(dir){
 							case "front":
-								blocksFromJson.get(i).front.add(blocksFromJson.get(Integer.parseInt(s)));
+								blocksFromJson.get(i).front.add(toadd);
 								break;
 							case "left":
-								blocksFromJson.get(i).left.add(blocksFromJson.get(Integer.parseInt(s)));
+								blocksFromJson.get(i).left.add(toadd);
 								break;
 							case "right":
-								blocksFromJson.get(i).right.add(blocksFromJson.get(Integer.parseInt(s)));
+								blocksFromJson.get(i).right.add(toadd);
 								break;
 							case "behind":
-								blocksFromJson.get(i).behind.add(blocksFromJson.get(Integer.parseInt(s)));
+								blocksFromJson.get(i).behind.add(toadd);
 								break;
 						}
 					}
 				}
 			}
 		}
-				
 //----------Find the starting block
 			
-			//--------------------- test input ---------------------
-			this.startBlock = blocksFromJson.get(0);
-			//--------------------- test input ---------------------
+		//--------------------- test input ---------------------
+		this.startBlock = blocksFromJson.get(0);
+		//--------------------- test input ---------------------
 
 	}
-
 }

@@ -55,8 +55,16 @@ public class SpatialRelationAnnotator extends Annotator{
 		InnerBlock behind = new InnerBlock(1,0.30,0,1.10, "behind");
 		output.add(behind);
 		
+<<<<<<< HEAD
+		InnerBlock secondleftFront = new InnerBlock(3,-8,0,14, "secondleftFront");
+		output.add(secondleftFront);
+		
+		InnerBlock right = new InnerBlock(4,5,0,1, "right");
+		output.add(right);
+=======
 		InnerBlock faraway = new InnerBlock(5,-3.00,0,1.25, "faraway");
 		output.add(faraway);
+>>>>>>> e447190fcbe879af0fd8a3e0dc171276af26424d
 		//--------------------- test input ---------------------
 		
 		return output;

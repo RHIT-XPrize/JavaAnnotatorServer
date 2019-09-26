@@ -4,10 +4,12 @@ public class BlockWrapper implements Comparable<BlockWrapper>{
 
 	public double distance;
 	public InnerBlock block;
+	public double confidence;
 	
-	public BlockWrapper(InnerBlock b, double distance){
+	public BlockWrapper(InnerBlock b, double distance, double confidence){
 		this.distance = distance;
 		this.block = b;
+		this.confidence = confidence;
 	}
 
 

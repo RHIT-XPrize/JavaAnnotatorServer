@@ -14,10 +14,10 @@ public class MetaBlock {
 	double z;
 	
 
-	public LinkedList<MetaBlock> left;
-	public LinkedList<MetaBlock> right;
-	public LinkedList<MetaBlock> front;
-	public LinkedList<MetaBlock> behind;
+	public LinkedList<MetablockConfidenceTuple> left;
+	public LinkedList<MetablockConfidenceTuple> right;
+	public LinkedList<MetablockConfidenceTuple> front;
+	public LinkedList<MetablockConfidenceTuple> behind;
 	
 	
 	public MetaBlock(int id, double x1, double y1, double z1, String name){

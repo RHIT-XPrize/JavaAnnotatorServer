@@ -13,12 +13,14 @@ import annotatorServer.Annotator;
 
 public class Grapher {
 	
-	final double MAX_DISTANCE = 10.0;
+	final double MAX_DISTANCE = 1.50;
+	double WIDTH_OF_WORKING_SPACE;
 	
 	List<InnerBlock> blocks;
 	
-	public Grapher (List<InnerBlock> blocks){
+	public Grapher (List<InnerBlock> blocks, double workingSpaceWidth){
 		this.blocks = blocks;
+		this.WIDTH_OF_WORKING_SPACE = workingSpaceWidth;
 	}
 	
 	public void makeGraph (){
@@ -93,8 +95,11 @@ public class Grapher {
 //		System.out.println("Current: " + current.name + " other: " + other.name+ "\n\tphi: " + po.getPhi() + " theta: " + po.getTheta());
 		
 		double distance = Math.abs(po.getR());
-		BlockWrapper otherWrapper = new BlockWrapper(other, distance);
-		BlockWrapper currentWrapper = new BlockWrapper(current, distance);
+		
+		double confidence = getConfidenceValue(distance);
+		
+		BlockWrapper otherWrapper = new BlockWrapper(other, distance,confidence);
+		BlockWrapper currentWrapper = new BlockWrapper(current, distance, confidence);
 		
 		if (distance > MAX_DISTANCE){
 			System.out.println("out of range");
@@ -121,5 +126,12 @@ public class Grapher {
 				other.behind.add(currentWrapper);
 			}
 		}
+	}
+	
+	public double getConfidenceValue(double distance) {
+		
+		double x  = distance/(this.WIDTH_OF_WORKING_SPACE/2.0);
+		
+		return 1/(1+Math.pow(Math.E,(x-5)));
 	}
 }

@@ -12,18 +12,20 @@ public class OutputBlock {
 	double x;
 	double y;
 	double z;
+	double confidenceValue;
 	
 	public String left;
 	public String right;
 	public String front;
 	public String behind;
 	
-	public OutputBlock(MetaBlock block){
+	public OutputBlock(MetaBlock block,double confidenceValue){
 		this.id = block.id;
 		this.name = block.name;
 		this.x = block.x;
 		this.y = block.y;
 		this.z = block.z;
+		this.confidenceValue = confidenceValue;
 		this.left = toStringOfIDs(block.left);
 		this.right = toStringOfIDs(block.right);
 		this.behind = toStringOfIDs(block.behind);
@@ -44,10 +46,10 @@ public class OutputBlock {
 		this.behind = "";
 	}
 	
-	public String toStringOfIDs (List<MetaBlock> blocks){
+	public String toStringOfIDs (List<MetablockConfidenceTuple> blocks){
 		List<Integer> output = new ArrayList<>();
-		for(MetaBlock b : blocks){
-			output.add(b.id);
+		for(MetablockConfidenceTuple b : blocks){
+			output.add(b.metaBlock.id);
 		}
 		return output.toString();	
 	}

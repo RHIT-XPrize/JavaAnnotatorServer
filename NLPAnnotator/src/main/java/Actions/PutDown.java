@@ -1,0 +1,46 @@
+package Actions;
+
+import actionArtifacts.CommandArtifact;
+import actionArtifacts.PickUpArtifact;
+import actionArtifacts.putdownArtifact;
+import dataStructures.SpokenPhrase;
+import dataStructures.WordProperties;
+import phraseParsers.PhraseParser;
+
+public class PutDown implements VerbalAction{
+	public final static String WORDONE = "Put";
+	public final static String WORDTWO = "Down";
+	public final static String PARTOFSPEECHONE = "VERB";
+	public final static String PARTOFSPEECHTWO = "PRT";
+	
+	PhraseParser gestureParser;
+	PhraseParser blockModParser;
+	
+	public PutDown(PhraseParser gestureParser, PhraseParser blockModParser) {
+		this.gestureParser = gestureParser;
+		this.blockModParser = blockModParser;
+	}
+	
+	@Override
+	public boolean isAction(SpokenPhrase phrase) {
+		for(WordProperties word: phrase.sentence){
+			if(word.lemma.equalsIgnoreCase(WORDTWO) && word.partOfSpeech.equalsIgnoreCase(PARTOFSPEECHTWO)){
+				if(word.parent.lemma.equalsIgnoreCase(WORDONE) && word.parent.partOfSpeech.equalsIgnoreCase(PARTOFSPEECHONE)){
+					System.out.println("here");
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public CommandArtifact parseImportant(SpokenPhrase phrase) {
+		String chain = blockModParser.findInformation(phrase);
+		boolean usesGesture = false;
+		if(!gestureParser.findInformation(phrase).equals("")){
+			usesGesture = true;
+		}
+		return new putdownArtifact(usesGesture, chain);
+	}
+}
