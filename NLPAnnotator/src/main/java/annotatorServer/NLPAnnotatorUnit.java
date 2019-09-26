@@ -47,7 +47,7 @@ public class NLPAnnotatorUnit extends Annotator {
 		String gsonString = "{" + unitWrapper + ": [";
 		for(VerbalAction action: actions){
 			if(action.isAction(phrase)){
-//				System.out.println(action.parseImportant(phrase).getString());
+				System.out.println(action.parseImportant(phrase).getString());
 				gsonString += gson.toJson(action.parseImportant(phrase));
 			}
 		}
