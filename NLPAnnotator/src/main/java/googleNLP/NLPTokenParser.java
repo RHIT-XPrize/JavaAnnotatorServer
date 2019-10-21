@@ -2,6 +2,6 @@ package googleNLP;
 
 import dataStructures.SpokenPhrase;
 
-public interface ParseInput {
+public interface NLPTokenParser {
 	public SpokenPhrase buildDependencyTree(String toParse);
 }

@@ -9,8 +9,6 @@ import spark.Route;
 
 public abstract class Annotator implements Route{
 	
-
-	
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
 		System.out.println(request.body());

@@ -16,11 +16,11 @@ import com.google.cloud.language.v1.EncodingType;
 import com.google.cloud.language.v1.LanguageServiceClient;
 import com.google.cloud.language.v1.Token;
 
-public class GoogleNLPAPIRequest implements ParseInput{
+public class GoogleNLPTokenAPIRequest implements NLPTokenParser{
 
 	private LanguageServiceClient language;
 	
-	public GoogleNLPAPIRequest() {
+	public GoogleNLPTokenAPIRequest() {
 		this.language = generateLanguage();
 	}
 	

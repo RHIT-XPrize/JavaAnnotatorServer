@@ -7,7 +7,7 @@ import dataStructures.SpokenPhrase;
 import dataStructures.WordProperties;
 import phraseParsers.PhraseParser;
 
-public class PutDown implements VerbalAction{
+public class PutDownAction implements VerbalAction{
 	public final static String WORDONE = "Put";
 	public final static String WORDTWO = "Down";
 	public final static String PARTOFSPEECHONE = "VERB";
@@ -16,7 +16,7 @@ public class PutDown implements VerbalAction{
 	PhraseParser gestureParser;
 	PhraseParser blockModParser;
 	
-	public PutDown(PhraseParser gestureParser, PhraseParser blockModParser) {
+	public PutDownAction(PhraseParser gestureParser, PhraseParser blockModParser) {
 		this.gestureParser = gestureParser;
 		this.blockModParser = blockModParser;
 	}

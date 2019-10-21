@@ -9,11 +9,12 @@ import com.google.gson.Gson;
 
 import Actions.NameAction;
 import Actions.PickUpAction;
-import Actions.PutDown;
+import Actions.PutDownAction;
 import Actions.VerbalAction;
+import actionArtifacts.UnknownArtifact;
 import dataStructures.SpokenPhrase;
-import googleNLP.GoogleNLPAPIRequest;
-import googleNLP.ParseInput;
+import googleNLP.GoogleNLPTokenAPIRequest;
+import googleNLP.NLPTokenParser;
 import phraseParsers.FindBlockMods;
 import phraseParsers.GestureParser;
 import phraseParsers.NameParser;
@@ -21,22 +22,15 @@ import phraseParsers.PhraseParser;
 
 public class NLPAnnotatorUnit extends Annotator {
 
-	public ParseInput request;
+	public NLPTokenParser request;
 	public List<VerbalAction> actions;
 	public Gson gson;
 	public String unitWrapper = "\"edu.rosehulman.aixprize.pipeline.types.NLPProcessor\"";
 	
-	public NLPAnnotatorUnit() {
-		this.request = new GoogleNLPAPIRequest();
-		this.actions = new ArrayList<>();
+	public NLPAnnotatorUnit(NLPTokenParser parser, List<VerbalAction> actions) {
+		this.request = parser;
+		this.actions = actions;
 		this.gson = new Gson();
-		PhraseParser nameParser = new NameParser();
-		PhraseParser gestureParser = new GestureParser();
-		PhraseParser findBlocksParser = new FindBlockMods();
-		
-		actions.add(new NameAction(nameParser, gestureParser, findBlocksParser));
-		actions.add(new PickUpAction(gestureParser, findBlocksParser));
-		actions.add(new PutDown(gestureParser, findBlocksParser));
 	}
 	
 	@Override
@@ -45,11 +39,17 @@ public class NLPAnnotatorUnit extends Annotator {
 		String result =	jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("SpokenText").getJSONObject(0).getString("text");
 		SpokenPhrase phrase = request.buildDependencyTree(result);
 		String gsonString = "{" + unitWrapper + ": [";
+		boolean found = false;
 		for(VerbalAction action: actions){
 			if(action.isAction(phrase)){
+				found = true;
 				System.out.println(action.parseImportant(phrase).getString());
 				gsonString += gson.toJson(action.parseImportant(phrase));
+				break;
 			}
+		}
+		if(!found){
+			gsonString += gson.toJson(new UnknownArtifact().getString());
 		}
 		gsonString += "]}";
 		return gsonString;

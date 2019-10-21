@@ -3,6 +3,7 @@ import static spark.Spark.*;
 
 import com.google.gson.Gson;
 
+import Factories.NLPAnnotatorFactory;
 import MetadataCompiler.MetadataAnnotator;
 import SpatialRelationGenerator.SpatialRelationAnnotator;
 
@@ -10,6 +11,8 @@ public class TestMain {
 
 	public static void main(String[] args) {
 
+		NLPAnnotatorFactory NLPFactory = new NLPAnnotatorFactory();
+		
 		port(3001);		
 		Annotator speech = new SpeechToTextAnnotator();
 		post("/Speech", speech);
@@ -17,7 +20,7 @@ public class TestMain {
 		post("/MetadataCompiler", metaData);
 		Annotator spatial = new SpatialRelationAnnotator();
 		post("/SpatialRelationGen", spatial);
-		Annotator handle = new NLPAnnotatorUnit();
+		Annotator handle = NLPFactory.createNLPAnnotator();
 		post("/NLPUnit", handle);
 	}
 }
