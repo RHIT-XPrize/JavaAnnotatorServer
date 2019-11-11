@@ -1,4 +1,5 @@
 package SpatialRelationGenerator;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.math3.geometry.euclidean.threed.SphericalCoordinates;
@@ -87,6 +88,13 @@ public class Grapher {
 
 	
 	private void checkRelation(InnerBlock current, InnerBlock other) {
+		//ad in relations to check against
+		ArrayList<SpatialRelation> relations = new ArrayList<>();
+		relations.add(new Left());
+		relations.add(new Right());
+		relations.add(new Front());
+		relations.add(new Behind());
+		
 		Vector3D vector = new Vector3D(other.x-current.x, other.y-current.y, other.z - current.z);
 		SphericalCoordinates po = new SphericalCoordinates(vector);
 		
@@ -103,29 +111,35 @@ public class Grapher {
 		
 		if (distance > MAX_DISTANCE){
 			System.out.println("out of range");
-		}else if (po.getTheta() < Math.PI/2) {
-			if(po.getPhi() < Math.PI/4){
-				current.front.add(otherWrapper);
-				other.behind.add(currentWrapper);
-			}else if (po.getPhi() <= (3.0*Math.PI)/4.0){
-				current.right.add(otherWrapper);
-				other.left.add(currentWrapper);
-			}else{
-				current.behind.add(otherWrapper);
-				other.front.add(currentWrapper);
-			}
-		}else{
-			if(po.getPhi() < Math.PI/4){
-				current.behind.add(otherWrapper);
-				other.front.add(currentWrapper);
-			}else if (po.getPhi() <= (3.0*Math.PI)/4.0){
-				current.left.add(otherWrapper);
-				other.right.add(currentWrapper);
-			}else{
-				current.front.add(otherWrapper);
-				other.behind.add(currentWrapper);
+		} else {
+			for(SpatialRelation relation : relations) {
+				relation.checkRelation(po, currentWrapper, otherWrapper, current, other);
 			}
 		}
+		
+//		else if (po.getTheta() < Math.PI/2) {
+//			if(po.getPhi() < Math.PI/4){
+//				current.front.add(otherWrapper);
+//				other.behind.add(currentWrapper);
+//			}else if (po.getPhi() <= (3.0*Math.PI)/4.0){
+//				current.right.add(otherWrapper);
+//				other.left.add(currentWrapper);
+//			}else{
+//				current.behind.add(otherWrapper);
+//				other.front.add(currentWrapper);
+//			}
+//		}else{
+//			if(po.getPhi() < Math.PI/4){
+//				current.behind.add(otherWrapper);
+//				other.front.add(currentWrapper);
+//			}else if (po.getPhi() <= (3.0*Math.PI)/4.0){
+//				current.left.add(otherWrapper);
+//				other.right.add(currentWrapper);
+//			}else{
+//				current.front.add(otherWrapper);
+//				other.behind.add(currentWrapper);
+//			}
+//		}
 	}
 	
 	public double getConfidenceValue(double distance) {
