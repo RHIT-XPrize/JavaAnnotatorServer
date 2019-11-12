@@ -11,8 +11,8 @@ public class TestMain {
 	public static void main(String[] args) {
 
 		port(3001);		
-//		Annotator speech = new SpeechToTextAnnotator();
-//		post("/Speech", speech);
+		Annotator speech = new SpeechToTextAnnotator();
+		post("/Speech", speech);
 		Annotator metaData = new MetadataAnnotator();
 		post("/MetadataCompiler", metaData);
 		Annotator spatial = new SpatialRelationAnnotator();
