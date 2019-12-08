@@ -17,13 +17,10 @@ public class FeedbackAnnotationType extends AnnotationType {
 		super(name);
 		this.chosenBlock = finalBlock;
 		this.feedback = feedback;
-
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public List<String> getFields() {
-		// TODO Auto-generated method stub
 		List<String> output = new ArrayList<>();
 		Gson gson = new Gson();
 

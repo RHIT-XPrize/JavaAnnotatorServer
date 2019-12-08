@@ -7,6 +7,7 @@ import Factories.NLPAnnotatorFactory;
 import Feedback.FeedbackAnnotator;
 import MetadataCompiler.MetadataAnnotator;
 import SpatialRelationGenerator.SpatialRelationAnnotator;
+import TextToSpeech.TextToSpeechAnnotator;
 
 public class TestMain {
 
@@ -24,8 +25,11 @@ public class TestMain {
 //		post("/SpatialRelationGen", spatial);
 //		Annotator handle = NLPFactory.createNLPAnnotator();
 //		post("/NLPUnit", handle);
-		
+//		
 		Annotator handle = new FeedbackAnnotator();
 		post("/Feedback", handle);
+
+//		Annotator handle = new TextToSpeechAnnotator();
+//		post("/TextToSpeech", handle);
 	}
 }

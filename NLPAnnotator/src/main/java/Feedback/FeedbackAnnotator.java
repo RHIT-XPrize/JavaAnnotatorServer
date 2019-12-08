@@ -17,7 +17,6 @@ public class FeedbackAnnotator extends Annotator {
 
 	@Override
 	public String process(String request) {
-		// TODO Auto-generated method stub
 		parseJson(request);
 		OutputBlock finalBlock = new OutputBlock(this.selectedBlock, this.confidenceValue);
 		String feedback = evaluateConfidence();
@@ -30,7 +29,6 @@ public class FeedbackAnnotator extends Annotator {
 	}
 
 	private void parseJson(String request) {
-		// TODO Auto-generated method stub
 		JSONObject jsonObj = new JSONObject(request);
 		JSONArray jsonArray = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("MetadataSelectedBlock");
 		
