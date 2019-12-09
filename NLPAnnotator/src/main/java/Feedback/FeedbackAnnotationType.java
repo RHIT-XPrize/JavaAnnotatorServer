@@ -10,12 +10,12 @@ import annotatorServer.AnnotationType;
 
 public class FeedbackAnnotationType extends AnnotationType {
 
-	OutputBlock chosenBlock;
+//	OutputBlock chosenBlock;
 	String feedback;
 
-	public FeedbackAnnotationType(String name, OutputBlock finalBlock, String feedback) {
+	public FeedbackAnnotationType(String name, String feedback) {
 		super(name);
-		this.chosenBlock = finalBlock;
+//		this.chosenBlock = finalBlock;
 		this.feedback = feedback;
 	}
 
@@ -24,7 +24,7 @@ public class FeedbackAnnotationType extends AnnotationType {
 		List<String> output = new ArrayList<>();
 		Gson gson = new Gson();
 
-		output.add(gson.toJson(this.chosenBlock));
+//		output.add(gson.toJson(this.chosenBlock));
 		output.add(gson.toJson(this.feedback));
 
 		return output;
