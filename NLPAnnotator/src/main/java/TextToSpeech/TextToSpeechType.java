@@ -1,11 +1,6 @@
 package TextToSpeech;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale; 
-import javax.speech.Central; 
-import javax.speech.synthesis.Synthesizer; 
-import javax.speech.synthesis.SynthesizerModeDesc;
-import javax.speech.synthesis.Voice;
 
 import com.google.gson.Gson;
 

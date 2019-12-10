@@ -10,12 +10,7 @@ import javax.speech.synthesis.Voice;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.google.gson.Gson;
-
-import Feedback.FeedbackAnnotationType;
-import MetadataCompiler.MetaBlock;
 import annotatorServer.Annotator;
-import annotatorServer.SpokenTextJava;
 
 public class TextToSpeechAnnotator extends Annotator{
 
@@ -23,7 +18,8 @@ public class TextToSpeechAnnotator extends Annotator{
 	public String process(String request) {
 		System.out.println("requeest "+request);
 		String feedback = parseJSON(request);
-		TextToSpeechType annotation= new TextToSpeechType("\"edu.rosehulman.aixprize.pipeline.types.TextToSpeech\"", "true");
+		String success = speak(feedback);
+		TextToSpeechType annotation= new TextToSpeechType("\"edu.rosehulman.aixprize.pipeline.types.TextToSpeech\"", success);
 
 		System.out.println("{" + annotation.getName() + ": "+ annotation.getFields() + "}");
 		
@@ -44,7 +40,7 @@ public class TextToSpeechAnnotator extends Annotator{
 		return feedbackString;
 	}
 	
-	private boolean speak(String feedback) {
+	private String speak(String feedback) {
 		try { 
         	System.setProperty("FreeTTSSynthEngineCentral",
         		    "com.sun.speech.freetts.jsapi.FreeTTSEngineCentral");
@@ -66,12 +62,12 @@ public class TextToSpeechAnnotator extends Annotator{
         		synth.speakPlainText(feedback, null);
         		synth.waitEngineState(Synthesizer.QUEUE_EMPTY);
         		synth.deallocate();
-        		return true;
+        		return "true";
         } 
   
         catch (Exception e) { 
             e.printStackTrace(); 
-            return false;
+            return "false";
         }
 	}
 	

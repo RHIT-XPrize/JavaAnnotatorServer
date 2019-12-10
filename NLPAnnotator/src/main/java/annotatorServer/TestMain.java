@@ -26,10 +26,10 @@ public class TestMain {
 //		Annotator handle = NLPFactory.createNLPAnnotator();
 //		post("/NLPUnit", handle);
 //		
-		Annotator handle = new FeedbackAnnotator();
-		post("/Feedback", handle);
-
-//		Annotator handle = new TextToSpeechAnnotator();
-//		post("/TextToSpeech", handle);
+//		Annotator handle = new FeedbackAnnotator();
+//		post("/Feedback", handle);
+//
+		Annotator handle = new TextToSpeechAnnotator();
+		post("/TextToSpeech", handle);
 	}
 }
