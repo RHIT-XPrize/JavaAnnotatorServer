@@ -4,6 +4,8 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
+import org.json.JSONObject;
+
 import actionArtifacts.BlockArtifact;
 import actionArtifacts.CommandArtifact;
 import actionArtifacts.NameArtifact;
@@ -15,6 +17,7 @@ public class NameAction implements VerbalAction {
 
 	public static final String ACTIONPHRASE = "name";
 	public static final String ACTIONPARTOFSPEECH = "verb";
+	
 	PhraseParser nameParser;
 	PhraseParser gestureParser;
 	PhraseParser blockModParser;
@@ -37,13 +40,12 @@ public class NameAction implements VerbalAction {
 
 	@Override
 	public CommandArtifact parseImportant(SpokenPhrase phrase) {
-		String assignedName = nameParser.findInformation(phrase);
-		String chain = blockModParser.findInformation(phrase);
-		boolean usesGesture = false;
-		if(!gestureParser.findInformation(phrase).equals("")){
-			usesGesture = true;
-		}
-		return new NameArtifact(usesGesture, assignedName, chain);
+		JSONObject object = new JSONObject();
+		nameParser.findInformation(phrase, object);
+		blockModParser.findInformation(phrase, object);
+		gestureParser.findInformation(phrase, object);
+		
+		return new NameArtifact(object);
 		
 	}
 

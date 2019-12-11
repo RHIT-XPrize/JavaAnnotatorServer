@@ -1,18 +1,20 @@
 package actionArtifacts;
 
+import org.json.JSONObject;
+
 import com.google.gson.Gson;
 
 public class putdownArtifact implements CommandArtifact{
-	boolean usesGesture;
-	String assignedName;
-	String mods;
-	String command;
 	
-	public putdownArtifact(boolean usesGesture, String mods) {
-		this.command = "pick up";
-		this.usesGesture = usesGesture;
-		this.assignedName = "";
-		this.mods = mods;
+	
+	
+	private static final String COMMAND = "pick up";
+	JSONObject compiledArtifact;
+	
+	public putdownArtifact(JSONObject object) {
+		compiledArtifact = new JSONObject();
+		compiledArtifact.put(COMMAND_TAG, COMMAND);
+		compiledArtifact.put(INFO_TAG, compiledArtifact); 
 	}
 	
 	@Override
@@ -22,12 +24,11 @@ public class putdownArtifact implements CommandArtifact{
 	}
 	@Override
 	public String getString() {
-		String output = "{Put Down: ";
-		output += "Uses Gesture: " + usesGesture + ", ";
-		output += "Mods(" + mods + ")";
-
-		output += "}";
-		return output;
+		return compiledArtifact.toString();
+	}
+	
+	public JSONObject getJson(){
+		return compiledArtifact;
 	}
 
 }

@@ -1,8 +1,10 @@
 package phraseParsers;
 
+import org.json.JSONObject;
+
 import dataStructures.SpokenPhrase;
 
 public interface PhraseParser {
 
-	public String findInformation(SpokenPhrase phrase);
+	public boolean findInformation(SpokenPhrase phrase, JSONObject object);
 }

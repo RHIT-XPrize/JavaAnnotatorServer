@@ -1,5 +1,7 @@
 package Actions;
 
+import org.json.JSONObject;
+
 import actionArtifacts.CommandArtifact;
 import actionArtifacts.PickUpArtifact;
 import actionArtifacts.putdownArtifact;
@@ -36,11 +38,9 @@ public class PutDownAction implements VerbalAction{
 
 	@Override
 	public CommandArtifact parseImportant(SpokenPhrase phrase) {
-		String chain = blockModParser.findInformation(phrase);
-		boolean usesGesture = false;
-		if(!gestureParser.findInformation(phrase).equals("")){
-			usesGesture = true;
-		}
-		return new putdownArtifact(usesGesture, chain);
+		JSONObject object = new JSONObject();
+		blockModParser.findInformation(phrase, object);
+		gestureParser.findInformation(phrase, object);
+		return new putdownArtifact(object);
 	}
 }
