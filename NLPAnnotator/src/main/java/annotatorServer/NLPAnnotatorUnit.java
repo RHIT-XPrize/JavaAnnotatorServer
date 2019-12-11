@@ -1,24 +1,13 @@
 package annotatorServer;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import org.json.JSONObject;
-
 import com.google.gson.Gson;
-
-import Actions.NameAction;
-import Actions.PickUpAction;
-import Actions.PutDownAction;
 import Actions.VerbalAction;
 import actionArtifacts.UnknownArtifact;
 import dataStructures.SpokenPhrase;
-import googleNLP.GoogleNLPTokenAPIRequest;
 import googleNLP.NLPTokenParser;
-import phraseParsers.FindBlockMods;
-import phraseParsers.GestureParser;
-import phraseParsers.NameParser;
-import phraseParsers.PhraseParser;
+
 
 public class NLPAnnotatorUnit extends Annotator {
 
@@ -36,6 +25,7 @@ public class NLPAnnotatorUnit extends Annotator {
 	@Override
 	public String process(String JSONRequest) {
 		JSONObject jsonObj = new JSONObject(JSONRequest);
+		//Note there can be more than one text in the json
 		String result =	jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("SpokenText").getJSONObject(0).getString("text");
 		SpokenPhrase phrase = request.buildDependencyTree(result);
 		String gsonString = "{" + unitWrapper + ": [";
