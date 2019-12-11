@@ -17,19 +17,19 @@ public class TestMain {
 		
 		port(3001);
 		
-//		Annotator speech = new SpeechToTextAnnotator();
-//		post("/Speech", speech);
-//		Annotator metaData = new MetadataAnnotator();
-//		post("/MetadataCompiler", metaData);
-//		Annotator spatial = new SpatialRelationAnnotator();
-//		post("/SpatialRelationGen", spatial);
-//		Annotator handle = NLPFactory.createNLPAnnotator();
-//		post("/NLPUnit", handle);
-//		
-//		Annotator handle = new FeedbackAnnotator();
-//		post("/Feedback", handle);
+		Annotator speech = new SpeechToTextAnnotator();
+		post("/Speech", speech);
+		Annotator metaData = new MetadataAnnotator();
+		post("/MetadataCompiler", metaData);
+		Annotator spatial = new SpatialRelationAnnotator();
+		post("/SpatialRelationGen", spatial);
+		Annotator handle = NLPFactory.createNLPAnnotator();
+		post("/NLPUnit", handle);
+		
+		Annotator feedback = new FeedbackAnnotator();
+		post("/Feedback", handle);
 //
-		Annotator handle = new TextToSpeechAnnotator();
+		Annotator textToSpeech = new TextToSpeechAnnotator();
 		post("/TextToSpeech", handle);
 	}
 }
