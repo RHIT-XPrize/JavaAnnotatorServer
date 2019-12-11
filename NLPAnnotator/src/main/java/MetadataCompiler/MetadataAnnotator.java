@@ -61,6 +61,7 @@ public class MetadataAnnotator extends Annotator{
 		this.degrees.add(1);
 		//--------------------- test input ---------------------
 		
+		System.out.println("Before NLP");
 		JSONArray spatialKeywords = null;
 		
 		try {
@@ -82,7 +83,7 @@ public class MetadataAnnotator extends Annotator{
 			
 			String noun = nounModifiers[0];		
 			
-			if(nounModifiers[1] != ""){
+			if(!nounModifiers[0].equals("") && !nounModifiers[1].equals("")){
 				String[] modifiers = nounModifiers[1].split("\\|");
 				for(int j = 0; j < modifiers.length; j++){
 					String modifier = modifiers[j].toUpperCase();
@@ -106,6 +107,7 @@ public class MetadataAnnotator extends Annotator{
 		
 		JSONArray blockData = null;
 		
+		System.out.println("Before Blocks");
 		try {
 			blockData = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("SpatialRelationBlock");
 		}
@@ -132,6 +134,7 @@ public class MetadataAnnotator extends Annotator{
 			blocksFromJson.put(blockForMap.id,blockForMap);
 		}
 		
+		System.out.println("Before Blocks relations");
 //----------Then Loop through JSON again, populate spatial relation lists of each block
 		for(int i = 1; i <= blockData.length(); i++){
 			JSONObject block = blockData.getJSONObject(i-1);

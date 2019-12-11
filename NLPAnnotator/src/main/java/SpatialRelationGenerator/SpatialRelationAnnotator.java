@@ -60,7 +60,7 @@ public class SpatialRelationAnnotator extends Annotator{
 			InnerBlock innerBlock = builder.withId(block.getInt("id"))
 				.withX(block.getDouble("camera_space_center_X"))
 				.withY(block.getDouble("camera_space_center_Y"))
-				.withX(block.getDouble("camera_space_depth"))
+				.withZ(block.getDouble("camera_space_depth"))
 				.withName(""+block.getInt("id"))
 				.build();
 			
