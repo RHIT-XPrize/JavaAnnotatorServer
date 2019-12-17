@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.cloud:google-cloud-speech:0.8.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.cloud/google-cloud-speech/0.8.0/a92340c9ca38cf39f698ec16071b4eb409f4c44f/google-cloud-speech-0.8.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.cloud/google-cloud-speech/0.8.0/8e809a1c21c6c8f47738e90912a95b2bef6542a7/google-cloud-speech-0.8.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
