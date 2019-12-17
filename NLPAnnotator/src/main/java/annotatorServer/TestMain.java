@@ -4,7 +4,7 @@ import static spark.Spark.*;
 import com.google.gson.Gson;
 
 import Factories.NLPAnnotatorFactory;
-import Feedback.FeedbackAnnotator;
+import Feedback.ConfidenceFeedbackAnnotator;
 import MetadataCompiler.MetadataAnnotator;
 import SpatialRelationGenerator.SpatialRelationAnnotator;
 import TextToSpeech.TextToSpeechAnnotator;
@@ -26,10 +26,10 @@ public class TestMain {
 		Annotator handle = NLPFactory.createNLPAnnotator();
 		post("/NLPUnit", handle);
 		
-		Annotator feedback = new FeedbackAnnotator();
-		post("/Feedback", handle);
+		Annotator feedback = new ConfidenceFeedbackAnnotator();
+		post("/Feedback", feedback);
 //
 		Annotator textToSpeech = new TextToSpeechAnnotator();
-		post("/TextToSpeech", handle);
+		post("/TextToSpeech", textToSpeech);
 	}
 }

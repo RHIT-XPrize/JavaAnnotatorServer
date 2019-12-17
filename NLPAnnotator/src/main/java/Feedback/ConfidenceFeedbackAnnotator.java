@@ -8,7 +8,7 @@ import MetadataCompiler.MetadataAnnotationType;
 import MetadataCompiler.OutputBlock;
 import annotatorServer.Annotator;
 
-public class FeedbackAnnotator extends Annotator {
+public class ConfidenceFeedbackAnnotator extends Annotator {
 	
 	private double confidenceValue;
 //	private MetaBlock selectedBlock;
@@ -20,11 +20,11 @@ public class FeedbackAnnotator extends Annotator {
 		parseJson(request);
 		String feedback = evaluateConfidence();
 		
-		FeedbackAnnotationType annotation= new FeedbackAnnotationType("\"edu.rosehulman.aixprize.pipeline.types.Feedback\"",  feedback);
+		ConfidenceFeedbackAnnotationType annotation= new ConfidenceFeedbackAnnotationType("\"edu.rosehulman.aixprize.pipeline.types.ConfidenceFeedback\"",  feedback);
 		
-		System.out.println("{" + annotation.getName() + ": "+ annotation.getFields() + "}");
+		System.out.println("{" + annotation.getName() + ": [{\"feedbackMsg\" : "+ annotation.feedbackMsg + "}]}");
 		
-		return "{" + annotation.getName() + ": "+ annotation.getFields() + "}";
+		return "{" + annotation.getName() + ": [{\"feedbackMsg\" : "+ annotation.feedbackMsg + "}]}";
 	}
 
 	private void parseJson(String request) {
