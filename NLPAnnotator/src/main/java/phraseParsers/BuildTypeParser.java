@@ -28,7 +28,7 @@ public class BuildTypeParser implements PhraseParser {
 				Construct match = savedConstructs.findMatching(word.lemma);
 				if(match != null){
 					object.put("Build_Type", match.identifier);
-					object.put("Build_With", match.builtWith);
+					object.put("Build_With", match.material);
 					return true;
 				}
 			}

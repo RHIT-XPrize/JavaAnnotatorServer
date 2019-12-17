@@ -24,7 +24,7 @@ import phraseParsers.WhereParser;
 
 public class Main {
 	public static void main(String[] args) {
-		String in = "Build a tower with green blocks.";
+		String in = "Build a tower with only red and green blocks.";
 		NLPTokenParser request = new GoogleNLPTokenAPIRequest();
 		System.out.println(in);
 		SpokenPhrase phrase = request.buildDependencyTree(in);

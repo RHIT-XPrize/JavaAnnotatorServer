@@ -28,7 +28,6 @@ public class PutDownAction implements VerbalAction{
 		for(WordProperties word: phrase.sentence){
 			if(word.lemma.equalsIgnoreCase(WORDTWO) && word.partOfSpeech.equalsIgnoreCase(PARTOFSPEECHTWO)){
 				if(word.parent.lemma.equalsIgnoreCase(WORDONE) && word.parent.partOfSpeech.equalsIgnoreCase(PARTOFSPEECHONE)){
-					System.out.println("here");
 					return true;
 				}
 			}
@@ -38,6 +37,7 @@ public class PutDownAction implements VerbalAction{
 
 	@Override
 	public CommandArtifact parseImportant(SpokenPhrase phrase) {
+		System.out.println("here");
 		JSONObject object = new JSONObject();
 		blockModParser.findInformation(phrase, object);
 		gestureParser.findInformation(phrase, object);

@@ -22,6 +22,7 @@ public class FindBlockMods implements PhraseParser{
 		directions.add("right");
 		directions.add("front");
 		directions.add("behind");
+		directions.add("next");
 	}
 	
 	@Override
