@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fff33be4-51b3-407e-a415-9b6a4c0dc142" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/MemorySave/MemorySaveAnnotationType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MemorySave/MemorySaveAnnotator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/annotatorServer/Annotator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/annotatorServer/Annotator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemorySave.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MemorySave.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MemoryLoad/MemoryLoadAnnotator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MemoryLoad/MemoryLoadAnnotator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MemorySave/MemorySaveAnnotationType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MemorySave/MemorySaveAnnotationType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MemorySave/MemorySaveAnnotator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MemorySave/MemorySaveAnnotator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/annotatorServer/TestMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/annotatorServer/TestMain.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -88,7 +88,10 @@
       <option name="presentableId" value="Default" />
       <updated>1575937303134</updated>
       <workItem from="1579552866493" duration="3275000" />
-      <workItem from="1579556164995" duration="1360000" />
+      <workItem from="1579556164995" duration="1920000" />
+      <workItem from="1579558105417" duration="1236000" />
+      <workItem from="1579559360604" duration="1680000" />
+      <workItem from="1579561059193" duration="1068000" />
     </task>
     <servers />
   </component>

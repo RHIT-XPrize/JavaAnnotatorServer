@@ -10,11 +10,12 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MemorySaveAnnotator extends Annotator {
 
     String request;
-    private MetaBlock block;
+    private ArrayList<MetaBlock> namedBlocks;
 
     @Override
     public String process(String request) throws IOException {
@@ -26,11 +27,11 @@ public class MemorySaveAnnotator extends Annotator {
         }
 
 
-        MemorySaveAnnotationType annotation= new MemorySaveAnnotationType("\"edu.rosehulman.aixprize.pipeline.types.MemoryType\"",  this.block);
+        MemorySaveAnnotationType annotation= new MemorySaveAnnotationType("\"edu.rosehulman.aixprize.pipeline.types.MemoryType\"",  this.namedBlocks);
         String output = "{" + annotation.getName() + ": "+ annotation.getFields() + "}";
 
         saveToFile(output);
-        return "{" + annotation.getName() + ": "+ annotation.getFields() + "}";
+        return "{" + annotation.getName() + ": [{ \"namedBlocks\": "+ annotation.getFields() + "}]}";
     }
 
     private void saveToFile(String output) throws IOException {
@@ -53,8 +54,29 @@ public class MemorySaveAnnotator extends Annotator {
         if(command.equals("Name")){
             name = "Testing Name";
         }
-        this.block = getBlock("Testing Name");
+        MetaBlock block = getBlock("Testing Name 2");
+        this.namedBlocks = getBlockList();
+        namedBlocks.add(block);
+    }
 
+    private ArrayList<MetaBlock> getBlockList() {
+        JSONObject jsonObj = new JSONObject(request);
+        JSONArray blockData = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("MemoryType");
+        JSONArray jsonList  = blockData.getJSONObject(0).getJSONArray("namedBlocks").getJSONArray(0);
+        ArrayList<MetaBlock> blockList = new ArrayList<>();
+        for(int i = 0; i < jsonList.length(); i++){
+            JSONObject block = jsonList.getJSONObject(i);
+            System.err.println(block);
+
+            MetaBlock metaBlock = new MetaBlock(block.getInt("id"),
+                    block.getDouble("x"),
+                    block.getDouble("y"),
+                    block.getDouble("z"),
+                    block.getString("name"));
+
+            blockList.add(metaBlock);
+        }
+        return blockList;
     }
 
     private MetaBlock getBlock(String name) {

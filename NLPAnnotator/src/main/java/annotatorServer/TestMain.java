@@ -1,6 +1,7 @@
 package annotatorServer;
 import static spark.Spark.*;
 
+import MemoryLoad.MemoryLoadAnnotator;
 import MemorySave.MemorySaveAnnotator;
 import com.google.gson.Gson;
 
@@ -34,5 +35,8 @@ public class TestMain {
 //		post("/TextToSpeech", handle);
 		Annotator memorySave = new MemorySaveAnnotator();
 		post("/MemorySave", memorySave);
+//
+//		Annotator memoryLoad = new MemoryLoadAnnotator();
+//		post("/MemoryLoad", memoryLoad);
 	}
 }

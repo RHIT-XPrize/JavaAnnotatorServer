@@ -8,19 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MemorySaveAnnotationType extends AnnotationType {
-    private final MetaBlock namedBlock;
+    private List<MetaBlock> namedBlocks = new ArrayList<>();
 
-    public MemorySaveAnnotationType(String name, MetaBlock block) {
+    public MemorySaveAnnotationType(String name, List<MetaBlock> blockList) {
         super(name);
-        this.namedBlock = block;
+        namedBlocks = blockList;
     }
 
     @Override
     public List<String> getFields() {
         List<String> output = new ArrayList<>();
         Gson gson = new Gson();
-
-        output.add(gson.toJson(this.namedBlock));
+        output.add(gson.toJson(this.namedBlocks));
         return output;
     }
 }
