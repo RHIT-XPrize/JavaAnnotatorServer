@@ -1,5 +1,6 @@
 package annotatorServer;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public abstract class Annotator implements Route{
 		return response.body();
 	}
 	
-	public abstract String process(String request);
+	public abstract String process(String request) throws IOException;
 	
 	public void setHeader(Response response){
 		response.status(200);

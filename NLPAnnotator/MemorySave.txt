@@ -1,0 +1,1 @@
+{"edu.rosehulman.aixprize.pipeline.types.MemoryType": [{"id":1,"name":"Testing Name","x":-0.02173464000225067,"y":-0.30106332898139954,"z":0.831000030040741,"left":[],"right":[],"front":[],"behind":[]}]}
