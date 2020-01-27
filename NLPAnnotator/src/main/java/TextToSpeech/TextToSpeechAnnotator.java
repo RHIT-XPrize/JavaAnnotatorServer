@@ -30,11 +30,11 @@ public class TextToSpeechAnnotator extends Annotator{
 	private String parseJSON(String request) {
 		System.out.println(request);
 		JSONObject jsonObj = new JSONObject(request);
-		JSONArray jsonArray = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("Feedback");
+		JSONArray jsonArray = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("ConfidenceFeedback");
 		
 		JSONObject feedback  = jsonArray.getJSONObject(0);
 		
-		String feedbackString = feedback.getString("feedback");
+		String feedbackString = feedback.getString("feedbackMsg");
 		System.out.println(feedbackString);
 
 		return feedbackString;
