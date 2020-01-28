@@ -1,6 +1,8 @@
 package annotatorServer;
 import static spark.Spark.*;
 
+import MemoryLoad.MemoryLoadAnnotator;
+import MemorySave.MemorySaveAnnotator;
 import com.google.gson.Gson;
 
 import Factories.NLPAnnotatorFactory;
@@ -29,7 +31,12 @@ public class TestMain {
 		Annotator feedback = new ConfidenceFeedbackAnnotator();
 		post("/Feedback", feedback);
 //
-		Annotator textToSpeech = new TextToSpeechAnnotator();
-		post("/TextToSpeech", textToSpeech);
+//		Annotator handle = new TextToSpeechAnnotator();
+//		post("/TextToSpeech", handle);
+		Annotator memorySave = new MemorySaveAnnotator();
+		post("/MemorySave", memorySave);
+//
+//		Annotator memoryLoad = new MemoryLoadAnnotator();
+//		post("/MemoryLoad", memoryLoad);
 	}
 }
