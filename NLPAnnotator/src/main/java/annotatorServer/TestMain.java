@@ -27,16 +27,14 @@ public class TestMain {
 		post("/SpatialRelationGen", spatial);
 		Annotator handle = NLPFactory.createNLPAnnotator();
 		post("/NLPUnit", handle);
-		
 		Annotator feedback = new ConfidenceFeedbackAnnotator();
 		post("/Feedback", feedback);
-//
-//		Annotator handle = new TextToSpeechAnnotator();
-//		post("/TextToSpeech", handle);
+		Annotator textToSpeech = new TextToSpeechAnnotator();
+		post("/TextToSpeech", textToSpeech);
+		
 		Annotator memorySave = new MemorySaveAnnotator();
 		post("/MemorySave", memorySave);
-//
-//		Annotator memoryLoad = new MemoryLoadAnnotator();
-//		post("/MemoryLoad", memoryLoad);
+		Annotator memoryLoad = new MemoryLoadAnnotator();
+		post("/MemoryLoad", memoryLoad);
 	}
 }

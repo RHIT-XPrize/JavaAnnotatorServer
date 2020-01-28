@@ -27,7 +27,7 @@ public class MemorySaveAnnotator extends Annotator {
         }
 
 
-        MemorySaveAnnotationType annotation= new MemorySaveAnnotationType("\"edu.rosehulman.aixprize.pipeline.types.MemoryType\"",  this.namedBlocks);
+        MemorySaveAnnotationType annotation= new MemorySaveAnnotationType("\"edu.rosehulman.aixprize.pipeline.types.Memory\"",  this.namedBlocks);
         String output = "{" + annotation.getName() + ": "+ annotation.getFields() + "}";
 
         saveToFile(output);
@@ -48,20 +48,23 @@ public class MemorySaveAnnotator extends Annotator {
 
         JSONArray NLPJsonArray = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("NLPProcessor");
         JSONObject NLPJson = NLPJsonArray.getJSONObject(0);
-        JSONObject jsonObject = NLPJson.getJSONObject("output");
-        String command = jsonObject.getString("Command");
-        String name = "";
-        if(command.equals("Name")){
-            name = "Testing Name";
-        }
-        MetaBlock block = getBlock("Testing Name 2");
+        String output = NLPJson.getString("output");
+        JSONObject jsonObject = new JSONObject(output);
+        String command = jsonObject.getString("command");
+        String name = jsonObject.getJSONObject("info").getString("Name");
+        MetaBlock block = getBlock(name);
         this.namedBlocks = getBlockList();
         namedBlocks.add(block);
     }
 
     private ArrayList<MetaBlock> getBlockList() {
         JSONObject jsonObj = new JSONObject(request);
-        JSONArray blockData = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("MemoryType");
+        JSONArray blockData = new JSONArray();
+        try{
+        	blockData = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("Memory");
+        } catch(Exception e){
+        	return new ArrayList<>();
+        }
         JSONArray jsonList  = blockData.getJSONObject(0).getJSONArray("namedBlocks").getJSONArray(0);
         ArrayList<MetaBlock> blockList = new ArrayList<>();
         for(int i = 0; i < jsonList.length(); i++){
