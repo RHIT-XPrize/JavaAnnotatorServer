@@ -2,20 +2,19 @@ package actionArtifacts;
 
 import java.util.List;
 
+import org.json.JSONObject;
+
 import com.google.gson.Gson;
 
 public class PickUpArtifact implements CommandArtifact {
 
-	boolean usesGesture;
-	String assignedName;
-	String mods;
-	String command;
+	private static final String COMMAND = "pick up";
+	JSONObject compiledArtifact;
 	
-	public PickUpArtifact(boolean usesGesture, String mods) {
-		this.command = "pick up";
-		this.usesGesture = usesGesture;
-		this.assignedName = "";
-		this.mods = mods;
+	public PickUpArtifact(JSONObject object) {
+		compiledArtifact = new JSONObject();
+		compiledArtifact.put("Command", COMMAND);
+		compiledArtifact.put(INFO_TAG, object);
 	}
 	
 	@Override
@@ -25,12 +24,7 @@ public class PickUpArtifact implements CommandArtifact {
 	}
 	@Override
 	public String getString() {
-		String output = "{Pick Up: ";
-		output += "Uses Gesture: " + usesGesture + ", ";
-		output += "Mods(" + mods + ")";
-
-		output += "}";
-		return output;
+		return compiledArtifact.toString();
 	}
 
 }

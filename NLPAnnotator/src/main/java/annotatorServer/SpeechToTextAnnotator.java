@@ -19,7 +19,7 @@ public class SpeechToTextAnnotator extends Annotator{
 
 		String output = recognition.getResponse();
 		// you can comment the following line out if you care what it says
-		output = "Pick up that green block.";
+		output = "Pick up the blue block to the left of that block.";
 		SpokenTextJava type = new SpokenTextJava(output);
 		return "{"+s+"["+gson.toJson(type)+"]"+"}";
 	}

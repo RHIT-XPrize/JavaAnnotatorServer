@@ -1,7 +1,11 @@
 package phraseParsers;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import actionArtifacts.Directions;
 import dataStructures.SpokenPhrase;
@@ -18,36 +22,46 @@ public class FindBlockMods implements PhraseParser{
 		directions.add("right");
 		directions.add("front");
 		directions.add("behind");
+		directions.add("next");
 	}
 	
 	@Override
-	public String findInformation(SpokenPhrase phrase) {
-		String output = "";
+	public boolean findInformation(SpokenPhrase phrase, JSONObject object) {
+		JSONArray jsonArray = new JSONArray();
 		for(int i = 0; i < phrase.sentence.size(); i ++){
 			WordProperties word = phrase.sentence.get(i);
-			String tempout = "";
 			if(word.partOfSpeech.equalsIgnoreCase("Noun")){
-				tempout += word.lemma + ">";
+				
+				JSONObject item = new JSONObject();
+				item.put("Item", word.lemma);
+				
+				JSONArray mods = new JSONArray();
+				
 				for(int j = i-1; j >= 0; j--){
 					WordProperties subWord = phrase.sentence.get(j);
 					if(subWord.partOfSpeech.equalsIgnoreCase("ADJ") && subWord.parent.equals(word)){
-						tempout += subWord.lemma + "|";
+						mods.put(subWord.lemma);
 					}
 					for(String dir: directions){
 						if(dir.equalsIgnoreCase(subWord.lemma)){
-							tempout += subWord.lemma + "|";
+							mods.put(subWord.lemma);
 						}
 					}
 					if(subWord.partOfSpeech.equalsIgnoreCase("NOUN")){
 						break;
 					}
 				}
-				if(!tempout.equals(word.lemma + ">")){
-					output += tempout + ",";					
+				item.put("Mods", mods);
+				
+				if(mods.toList().size() != 0){
+					jsonArray.put(item);
 				}
+				
 			}
+			
 		}
-		return output;
+		object.put("Object_Mods", jsonArray);
+		return true;
 		
 	}
 	

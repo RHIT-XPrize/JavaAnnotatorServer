@@ -2,20 +2,20 @@ package actionArtifacts;
 
 import java.util.List;
 
+import org.json.JSONObject;
+
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.google.gson.Gson;
 
 public class NameArtifact implements CommandArtifact {
 
-	boolean usesGesture;
-	String assignedName;
-	String mods;
-	String command;
+	private static final String COMMAND = "Name";
+	JSONObject compiledArtifact;
 	
-	public NameArtifact(boolean usesGesture, String assignedName, String mods) {
-		this.command = "Name";
-		this.usesGesture = usesGesture;
-		this.assignedName = assignedName;
-		this.mods = mods;
+	public NameArtifact(JSONObject object) {
+		compiledArtifact = new JSONObject();
+		compiledArtifact.put(COMMAND_TAG, COMMAND);
+		compiledArtifact.put(INFO_TAG, object);
 	}
 
 	@Override
@@ -24,14 +24,8 @@ public class NameArtifact implements CommandArtifact {
 	}
 
 	@Override
-	public String getString() {
-		String output = "{Name: ";
-		output += "Uses Gesture: " + usesGesture + ", ";
-		output += "Assigned Name: " + assignedName + ", ";
-		output += "Mods(" + mods + ")";
-
-		output += "}";
-		return output;
+	public String getString() {		
+		return compiledArtifact.toString();
 	}
 
 }

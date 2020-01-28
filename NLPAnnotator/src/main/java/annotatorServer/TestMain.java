@@ -6,7 +6,7 @@ import MemorySave.MemorySaveAnnotator;
 import com.google.gson.Gson;
 
 import Factories.NLPAnnotatorFactory;
-import Feedback.FeedbackAnnotator;
+import Feedback.ConfidenceFeedbackAnnotator;
 import MetadataCompiler.MetadataAnnotator;
 import SpatialRelationGenerator.SpatialRelationAnnotator;
 import TextToSpeech.TextToSpeechAnnotator;
@@ -19,17 +19,17 @@ public class TestMain {
 		
 		port(3001);
 		
-//		Annotator speech = new SpeechToTextAnnotator();
-//		post("/Speech", speech);
-//		Annotator metaData = new MetadataAnnotator();
-//		post("/MetadataCompiler", metaData);
-//		Annotator spatial = new SpatialRelationAnnotator();
-//		post("/SpatialRelationGen", spatial);
-//		Annotator handle = NLPFactory.createNLPAnnotator();
-//		post("/NLPUnit", handle);
-//		
-//		Annotator handle = new FeedbackAnnotator();
-//		post("/Feedback", handle);
+		Annotator speech = new SpeechToTextAnnotator();
+		post("/Speech", speech);
+		Annotator metaData = new MetadataAnnotator();
+		post("/MetadataCompiler", metaData);
+		Annotator spatial = new SpatialRelationAnnotator();
+		post("/SpatialRelationGen", spatial);
+		Annotator handle = NLPFactory.createNLPAnnotator();
+		post("/NLPUnit", handle);
+		
+		Annotator feedback = new ConfidenceFeedbackAnnotator();
+		post("/Feedback", feedback);
 //
 //		Annotator handle = new TextToSpeechAnnotator();
 //		post("/TextToSpeech", handle);

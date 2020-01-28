@@ -8,15 +8,15 @@ import com.google.gson.Gson;
 import MetadataCompiler.OutputBlock;
 import annotatorServer.AnnotationType;
 
-public class FeedbackAnnotationType extends AnnotationType {
+public class ConfidenceFeedbackAnnotationType extends AnnotationType {
 
 //	OutputBlock chosenBlock;
-	String feedback;
+	String feedbackMsg;
 
-	public FeedbackAnnotationType(String name, String feedback) {
+	public ConfidenceFeedbackAnnotationType(String name, String feedback) {
 		super(name);
 //		this.chosenBlock = finalBlock;
-		this.feedback = feedback;
+		this.feedbackMsg = feedback;
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class FeedbackAnnotationType extends AnnotationType {
 		Gson gson = new Gson();
 
 //		output.add(gson.toJson(this.chosenBlock));
-		output.add(gson.toJson(this.feedback));
+		output.add(gson.toJson(this.feedbackMsg));
 
 		return output;
 	}

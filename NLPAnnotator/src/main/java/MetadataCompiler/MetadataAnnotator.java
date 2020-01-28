@@ -8,6 +8,9 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONString;
+
+import com.google.api.client.json.Json;
 
 import SpatialRelationGenerator.InnerBlock;
 import annotatorServer.Annotator;
@@ -62,38 +65,53 @@ public class MetadataAnnotator extends Annotator{
 		//--------------------- test input ---------------------
 		
 		System.out.println("Before NLP");
-		JSONArray spatialKeywords = null;
+		JSONArray NLPProcessor = null;
 		
 		try {
-			spatialKeywords = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("NLPProcessor");
+			NLPProcessor = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("NLPProcessor");
 		} 
 		catch(JSONException je) {
 			System.err.println(je);
 			return;
 		}
 		
-		String nounModifierPairs = spatialKeywords.getJSONObject(0).getString("mods");
+		String output = NLPProcessor.getJSONObject(0).getString("output");
+		System.out.println("Output: " + output);
 		
-		String[] arrayOfNouns = nounModifierPairs.split(",");
-		
+		JSONArray object_Mods = new JSONObject(output).getJSONObject("info").getJSONArray("Object_Mods");
 		
 		List<String> reverseOrderMods = new ArrayList<>();
-		for (int i = 0; i < arrayOfNouns.length; i++){
-			String[] nounModifiers = arrayOfNouns[i].split(">");
-			
-			String noun = nounModifiers[0];		
-			
-			if(!nounModifiers[0].equals("") && !nounModifiers[1].equals("")){
-				String[] modifiers = nounModifiers[1].split("\\|");
-				for(int j = 0; j < modifiers.length; j++){
-					String modifier = modifiers[j].toUpperCase();
-					if(modifier.equals("FRONT") || modifier.equals("LEFT") || modifier.equals("BEHIND") || modifier.equals("RIGHT")){
-						reverseOrderMods.add(modifier);
-					}
-				}
-			}
 		
+		for(int i = 0; i < object_Mods.length(); i++) {
+			JSONArray mods = object_Mods.getJSONObject(i).getJSONArray("Mods");
+			mods.forEach(mod -> {
+				String s = ((String) mod).toUpperCase();
+				if(s.equals("FRONT") || s.equals("LEFT") || s.equals("BEHIND") || s.equals("RIGHT")){
+					reverseOrderMods.add(s);
+				}
+			});
 		}
+		
+//		String[] arrayOfNouns = nounModifierPairs.split(",");
+//		
+//		
+//		List<String> reverseOrderMods = new ArrayList<>();
+//		for (int i = 0; i < arrayOfNouns.length; i++){
+//			String[] nounModifiers = arrayOfNouns[i].split(">");
+//			
+//			String noun = nounModifiers[0];		
+//			
+//			if(!nounModifiers[0].equals("") && !nounModifiers[1].equals("")){
+//				String[] modifiers = nounModifiers[1].split("\\|");
+//				for(int j = 0; j < modifiers.length; j++){
+//					String modifier = modifiers[j].toUpperCase();
+//					if(modifier.equals("FRONT") || modifier.equals("LEFT") || modifier.equals("BEHIND") || modifier.equals("RIGHT")){
+//						reverseOrderMods.add(modifier);
+//					}
+//				}
+//			}
+//		
+//		}
 		
 		for(int i = reverseOrderMods.size() - 1; i >= 0; i--){
 			this.relationKeywords.add(reverseOrderMods.get(i));	
@@ -191,6 +209,7 @@ public class MetadataAnnotator extends Annotator{
 		
 		//-----select start block------
 		this.startBlock = blocksFromJson.get(originId);
+		System.out.println("Start Block: " + this.startBlock);
 		System.out.println("BLOCKS: " + blocksFromJson);
 		System.out.println("ORIGIN: " + originId);
 

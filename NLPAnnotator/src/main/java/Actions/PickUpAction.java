@@ -3,6 +3,8 @@ package Actions;
 import java.util.Arrays;
 import java.util.List;
 
+import org.json.JSONObject;
+
 import actionArtifacts.CommandArtifact;
 import actionArtifacts.PickUpArtifact;
 import dataStructures.SpokenPhrase;
@@ -39,12 +41,10 @@ public class PickUpAction implements VerbalAction {
 
 	@Override
 	public CommandArtifact parseImportant(SpokenPhrase phrase) {
-		String chain = blockModParser.findInformation(phrase);
-		boolean usesGesture = false;
-		if(!gestureParser.findInformation(phrase).equals("")){
-			usesGesture = true;
-		}
-		return new PickUpArtifact(usesGesture, chain);
+		JSONObject object = new JSONObject();
+		blockModParser.findInformation(phrase, object);
+		gestureParser.findInformation(phrase, object);
+		return new PickUpArtifact(object);
 	}
 
 }
