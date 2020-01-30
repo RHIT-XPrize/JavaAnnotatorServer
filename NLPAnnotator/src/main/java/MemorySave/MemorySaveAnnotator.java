@@ -31,7 +31,7 @@ public class MemorySaveAnnotator extends Annotator {
         String output = "{" + annotation.getName() + ": "+ annotation.getFields() + "}";
 
         saveToFile(output);
-        return "{" + annotation.getName() + ": [{ \"namedBlocks\": "+ annotation.getFields() + "}]}";
+        return output;
     }
 
     private void saveToFile(String output) throws IOException {
@@ -65,7 +65,7 @@ public class MemorySaveAnnotator extends Annotator {
         } catch(Exception e){
         	return new ArrayList<>();
         }
-        JSONArray jsonList  = blockData.getJSONObject(0).getJSONArray("namedBlocks").getJSONArray(0);
+        JSONArray jsonList  = blockData.getJSONArray(0);;
         ArrayList<MetaBlock> blockList = new ArrayList<>();
         for(int i = 0; i < jsonList.length(); i++){
             JSONObject block = jsonList.getJSONObject(i);
