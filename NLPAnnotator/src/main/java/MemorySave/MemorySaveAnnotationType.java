@@ -19,7 +19,7 @@ public class MemorySaveAnnotationType extends AnnotationType {
     public List<String> getFields() {
         List<String> output = new ArrayList<>();
         Gson gson = new Gson();
-        output.add(gson.toJson(this.namedBlocks));
+        output.add("{\"namedBlocks\":" + gson.toJson(this.namedBlocks) + "}");
         return output;
     }
 }

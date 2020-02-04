@@ -35,7 +35,7 @@ public class MemoryLoadAnnotator extends Annotator {
 
         JSONObject jsonObj = new JSONObject(json);
 
-        JSONArray NLPJsonArray = jsonObj.getJSONArray("edu.rosehulman.aixprize.pipeline.types.Memory").getJSONArray(0);
+        JSONArray NLPJsonArray = jsonObj.getJSONArray("edu.rosehulman.aixprize.pipeline.types.Memory").getJSONObject(0).getJSONArray("namedBlocks");
         ArrayList<MetaBlock> blockList = new ArrayList<>();
         for(int i = 0; i < NLPJsonArray.length(); i++){
             JSONObject block = NLPJsonArray.getJSONObject(i);

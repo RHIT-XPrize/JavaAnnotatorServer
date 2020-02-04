@@ -10,6 +10,7 @@ import Feedback.ConfidenceFeedbackAnnotator;
 import MetadataCompiler.MetadataAnnotator;
 import SpatialRelationGenerator.SpatialRelationAnnotator;
 import TextToSpeech.TextToSpeechAnnotator;
+import helloWorld.JavaHelloWorldAnnotator;
 
 public class TestMain {
 
@@ -36,5 +37,8 @@ public class TestMain {
 		post("/MemorySave", memorySave);
 		Annotator memoryLoad = new MemoryLoadAnnotator();
 		post("/MemoryLoad", memoryLoad);
+		
+		Annotator helloWorld = new JavaHelloWorldAnnotator();
+		post("/JavaHelloWorld", helloWorld);
 	}
 }

@@ -65,7 +65,9 @@ public class MemorySaveAnnotator extends Annotator {
         } catch(Exception e){
         	return new ArrayList<>();
         }
-        JSONArray jsonList  = blockData.getJSONArray(0);;
+        JSONObject blocksObject = blockData.getJSONObject(0);
+        String namedBlocksString = blocksObject.getString("namedBlocks");
+        JSONArray jsonList  = new JSONArray(namedBlocksString);
         ArrayList<MetaBlock> blockList = new ArrayList<>();
         for(int i = 0; i < jsonList.length(); i++){
             JSONObject block = jsonList.getJSONObject(i);
