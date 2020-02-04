@@ -12,7 +12,7 @@ import SpatialRelationGenerator.SpatialRelationAnnotator;
 import TextToSpeech.TextToSpeechAnnotator;
 import helloWorld.JavaHelloWorldAnnotator;
 
-public class TestMain {
+public class Main {
 
 	public static void main(String[] args) {
 
