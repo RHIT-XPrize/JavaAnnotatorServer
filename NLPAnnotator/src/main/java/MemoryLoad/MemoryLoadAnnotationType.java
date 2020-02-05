@@ -1,15 +1,16 @@
-package MemorySave;
+package MemoryLoad;
 
+import MemorySave.NamedBlock;
 import annotatorServer.AnnotationType;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MemorySaveAnnotationType extends AnnotationType {
+public class MemoryLoadAnnotationType extends AnnotationType {
     private List<NamedBlock> namedBlocks = new ArrayList<>();
 
-    public MemorySaveAnnotationType(String name, List<NamedBlock> blockList) {
+    public MemoryLoadAnnotationType(String name, List<NamedBlock> blockList) {
         super(name);
         namedBlocks = blockList;
     }

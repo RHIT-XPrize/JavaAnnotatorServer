@@ -1,6 +1,7 @@
 package MemoryLoad;
 
 import MemorySave.MemorySaveAnnotationType;
+import MemorySave.NamedBlock;
 import MetadataCompiler.MetaBlock;
 import annotatorServer.Annotator;
 import org.json.JSONArray;
@@ -16,14 +17,14 @@ public class MemoryLoadAnnotator extends Annotator {
 
     @Override
     public String process(String request) throws IOException {
-        ArrayList<MetaBlock> blockList = getBlockList();
+        ArrayList<NamedBlock> blockList = getBlockList();
 
-        MemorySaveAnnotationType annotation= new MemorySaveAnnotationType("\"edu.rosehulman.aixprize.pipeline.types.Memory\"",  blockList);
+        MemorySaveAnnotationType annotation= new MemorySaveAnnotationType("\"edu.rosehulman.aixprize.pipeline.types.MemoryLoad\"",  blockList);
         String output = "{" + annotation.getName() + ": "+ annotation.getFields() + "}";
         return output;
     }
 
-    private ArrayList<MetaBlock> getBlockList() throws IOException {
+    private ArrayList<NamedBlock> getBlockList() throws IOException {
 
         BufferedReader reader = new BufferedReader(new FileReader("MemorySave.txt"));
         String json = "";
@@ -35,18 +36,18 @@ public class MemoryLoadAnnotator extends Annotator {
 
         JSONObject jsonObj = new JSONObject(json);
 
-        JSONArray NLPJsonArray = jsonObj.getJSONArray("edu.rosehulman.aixprize.pipeline.types.Memory").getJSONObject(0).getJSONArray("namedBlocks");
-        ArrayList<MetaBlock> blockList = new ArrayList<>();
+        JSONArray NLPJsonArray = jsonObj.getJSONArray("edu.rosehulman.aixprize.pipeline.types.MemorySave").getJSONObject(0).getJSONArray("namedBlocks");
+        ArrayList<NamedBlock> blockList = new ArrayList<>();
         for(int i = 0; i < NLPJsonArray.length(); i++){
             JSONObject block = NLPJsonArray.getJSONObject(i);
 
-            MetaBlock metaBlock = new MetaBlock(block.getInt("id"),
+            NamedBlock namedBlock = new NamedBlock(block.getInt("id"),
                     block.getDouble("x"),
                     block.getDouble("y"),
                     block.getDouble("z"),
                     block.getString("name"));
 
-            blockList.add(metaBlock);
+            blockList.add(namedBlock);
         }
         return blockList;
     }

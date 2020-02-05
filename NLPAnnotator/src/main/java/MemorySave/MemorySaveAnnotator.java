@@ -1,6 +1,5 @@
 package MemorySave;
 
-import MetadataCompiler.MetaBlock;
 import annotatorServer.Annotator;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 public class MemorySaveAnnotator extends Annotator {
 
     String request;
-    private ArrayList<MetaBlock> namedBlocks;
+    private ArrayList<NamedBlock> namedBlocks;
 
     @Override
     public String process(String request) throws IOException {
@@ -27,7 +26,7 @@ public class MemorySaveAnnotator extends Annotator {
         }
 
 
-        MemorySaveAnnotationType annotation= new MemorySaveAnnotationType("\"edu.rosehulman.aixprize.pipeline.types.Memory\"",  this.namedBlocks);
+        MemorySaveAnnotationType annotation= new MemorySaveAnnotationType("\"edu.rosehulman.aixprize.pipeline.types.MemorySave\"",  this.namedBlocks);
         String output = "{" + annotation.getName() + ": "+ annotation.getFields() + "}";
 
         saveToFile(output);
@@ -52,43 +51,43 @@ public class MemorySaveAnnotator extends Annotator {
         JSONObject jsonObject = new JSONObject(output);
         String command = jsonObject.getString("command");
         String name = jsonObject.getJSONObject("info").getString("Name");
-        MetaBlock block = getBlock(name);
+        NamedBlock block = getBlock(name);
         this.namedBlocks = getBlockList();
         namedBlocks.add(block);
     }
 
-    private ArrayList<MetaBlock> getBlockList() {
+    private ArrayList<NamedBlock> getBlockList() {
         JSONObject jsonObj = new JSONObject(request);
         JSONArray blockData = new JSONArray();
         try{
-        	blockData = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("Memory");
+        	blockData = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("MemoryLoad");
         } catch(Exception e){
         	return new ArrayList<>();
         }
         JSONObject blocksObject = blockData.getJSONObject(0);
         String namedBlocksString = blocksObject.getString("namedBlocks");
         JSONArray jsonList  = new JSONArray(namedBlocksString);
-        ArrayList<MetaBlock> blockList = new ArrayList<>();
+        ArrayList<NamedBlock> blockList = new ArrayList<>();
         for(int i = 0; i < jsonList.length(); i++){
             JSONObject block = jsonList.getJSONObject(i);
             System.err.println(block);
 
-            MetaBlock metaBlock = new MetaBlock(block.getInt("id"),
+            NamedBlock namedBlock = new NamedBlock(block.getInt("id"),
                     block.getDouble("x"),
                     block.getDouble("y"),
                     block.getDouble("z"),
                     block.getString("name"));
 
-            blockList.add(metaBlock);
+            blockList.add(namedBlock);
         }
         return blockList;
     }
 
-    private MetaBlock getBlock(String name) {
+    private NamedBlock getBlock(String name) {
         JSONObject jsonObj = new JSONObject(request);
         JSONArray jsonArray = jsonObj.getJSONObject("_views").getJSONObject("_InitialView").getJSONArray("MetadataSelectedBlock");
         JSONObject block = jsonArray.getJSONObject(0);
-        MetaBlock selectedBlock = new MetaBlock(block.getInt("id"),
+        NamedBlock selectedBlock = new NamedBlock(block.getInt("id"),
                 block.getDouble("x"),
                 block.getDouble("y"),
                 block.getDouble("z"),
