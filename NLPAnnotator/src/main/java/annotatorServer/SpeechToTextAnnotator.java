@@ -19,7 +19,7 @@ public class SpeechToTextAnnotator extends Annotator{
 
 		String output = recognition.getResponse();
 		// you can comment the following line out if you care what it says
-		output = "Name that block Mitchell.";
+		output = "Name that block Joseph.";
 		SpokenTextJava type = new SpokenTextJava(output);
 		return "{"+s+"["+gson.toJson(type)+"]"+"}";
 	}
